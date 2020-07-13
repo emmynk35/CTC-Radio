@@ -15,10 +15,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MatGridListModule,
     BrowserAnimationsModule,
     MatToolbarModule,
-    MatButtonModule,
-    MatGridListModule
+    MatButtonModule
+   
+
   ],
   providers: [],
   bootstrap: [AppComponent]
