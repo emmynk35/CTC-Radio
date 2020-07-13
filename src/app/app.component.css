@@ -1,0 +1,17 @@
+.spacer {
+    flex: 1 auto;
+}
+
+.toolbar {
+    border-bottom: 1px solid black;
+    padding: 0px 30px 0px 30px;
+}
+
+a {
+    margin-left: 30px;
+    text-decoration: none;
+}
+
+.login-button {
+    margin-left: 50px;
+}
