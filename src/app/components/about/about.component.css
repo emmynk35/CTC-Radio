@@ -1,4 +1,9 @@
 .container {
-    padding-left: 50px;
-    padding-right: 50px;
+    padding: 60px 60px 0px 60px; 
+    color: #eeeeee;
+    height: 100%;
+}
+
+h1 {
+    font-size: 30px;
 }
