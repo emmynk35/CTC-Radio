@@ -5,7 +5,6 @@ import { AboutComponent } from '../app/components/about/about.component';
 
 const routes: Routes = [
   {path: 'about', component: AboutComponent},
-  
 ];
 
 @NgModule({
