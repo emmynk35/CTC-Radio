@@ -1,0 +1,21 @@
+h2 {
+    color: #eeeeee;
+}
+
+.top {
+    border-bottom: 1px solid black;
+    display: flex;
+    height: 10%;
+    align-items: center;;
+}
+
+.spacer {
+    flex: 1 auto;
+}
+
+.button {
+    margin-right: 20px;
+    height: 50%;
+    background-color: #1DB954;
+    color: #eeeeee;
+}
