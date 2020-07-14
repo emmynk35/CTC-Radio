@@ -10,7 +10,7 @@ th, td {
     width: 10%;
 }
 
-table {
+table, ng-container {
     background-color: #121212 !important;
 }
 
