@@ -10,7 +10,6 @@ const routes: Routes = [
   {path: 'about', component: AboutComponent},
   {path: 'radio', component: RadioComponent},
   {path: 'daily-playlists', component: DailyPlaylistsComponent},
-  {path: 'playlist-popup', component: PlaylistPopupComponent},
 ];
 
 @NgModule({
