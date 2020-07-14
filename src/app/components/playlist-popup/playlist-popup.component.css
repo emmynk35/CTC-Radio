@@ -2,20 +2,28 @@ h2 {
     color: #eeeeee;
 }
 
-.top {
-    border-bottom: 1px solid black;
-    display: flex;
-    height: 10%;
-    align-items: center;;
+img {
+    width: 8%;
 }
 
-.spacer {
-    flex: 1 auto;
+th, td {
+    width: 10%;
 }
 
-.button {
-    margin-right: 20px;
-    height: 50%;
-    background-color: #1DB954;
-    color: #eeeeee;
+table {
+    background-color: #121212 !important;
+}
+
+td.mat-cell {
+    border-color: #282828;
+}
+
+mat-dialog-actions {
+    margin-top: 30px;
+    float: right;
+}
+
+button {
+    margin-right: 30px;
+    color: #eeeeee !important;
 }
