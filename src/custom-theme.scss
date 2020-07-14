@@ -15,7 +15,7 @@
 $ctc-radio-primary: mat-palette($mat-green, A700);
 $ctc-radio-accent: mat-palette($mat-grey, A800);
 
-$ctc-radio-background: mat-palette($mat-grey, A800, A900);
+$ctc-radio-background: mat-palette($mat-grey, A900);
 
 // The warn palette is optional (defaults to red).
 $ctc-radio-warn: mat-palette($mat-red);
@@ -27,4 +27,3 @@ $ctc-radio-theme: mat-dark-theme($ctc-radio-primary, $ctc-radio-accent, $ctc-rad
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include angular-material-theme($ctc-radio-theme);
-
