@@ -1,85 +1,100 @@
+<div class="container">
+    <h1>Daily Playlists</h1>
 
-<h1>Daily Playlists</h1>
-    
-<p>Here you will find the past days' radio queues compiled into individual playlists.</p>
- 
-<ul class="mdc-image-list my-image-list">
-      <div class="mdc-image-list__image-aspect-container">
-        <div class = "gallery-item"> 
-              <img src="https://static.billboard.com/files/media/maggie-rogers-heard-it-in-a-past-life-album-art-2019-billboard-1240-1024x1024.jpg" style="width:300px;height:300px;" class="gallery-img">
-              <div class="button-container">
-                <button mat-fab color="accent" aria-label="Example icon button with a bookmark icon" class="play-button" (click)="this.play('maggie-rogers-heard-it-in-a-past-life')">
-                  <mat-icon>play_arrow</mat-icon>
-                </button>
-              </div>
-        </div>
-        <div class = "gallery-item"> 
+    <p>Here you will find the past days' radio queues compiled into individual playlists.</p>
+
+    <mat-grid-list cols="5">
+        <mat-grid-tile>
+            <div class="gallery-item">
+            <img src="https://static.billboard.com/files/media/maggie-rogers-heard-it-in-a-past-life-album-art-2019-billboard-1240-1024x1024.jpg" style="width:300px;height:300px;" class="gallery-img">
+                <div class="button-container">
+                    <button mat-fab color="accent" aria-label="Example icon button with a bookmark icon" class="play-button" (click)="this.play('maggie-rogers-heard-it-in-a-past-life')">
+                        <mat-icon>play_arrow</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </mat-grid-tile> 
+        <mat-grid-tile>
+            <div class="gallery-item">
             <img src= "https://static.billboard.com/files/media/Anderson-.Paak-Ventura-album-art-2019-billboard-1240-1024x1024.jpg" style="width:300px;height:300px;" class="gallery-img">
-            <div class="button-container">
-                <button mat-fab color="accent" aria-label="Example icon button with a bookmark icon" class="play-button" (click)="this.play('Anderson-.Paak-Ventura')">
-                  <mat-icon>play_arrow</mat-icon>
-                </button>
-              </div>
-        </div>
-        <div class = "gallery-item"> 
+                <div class="button-container">
+                    <button mat-fab color="accent" aria-label="Example icon button with a bookmark icon" class="play-button" (click)="this.play('Anderson-.Paak-Ventura')">
+                        <mat-icon>play_arrow</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <div class="gallery-item">
             <img src="https://static.billboard.com/files/media/Billie-Eilish-When-We-All-Fall-Asleep-Where-Do-We-Go_-album-art-2019-billboard-1240-1024x1024.jpg" style="width:300px;height:300px;" class="gallery-img">
             <div class="button-container">
                 <button mat-fab color="accent" aria-label="Example icon button with a bookmark icon" class="play-button" (click)="this.play('Billie-Eilish-When-We-All-Fall-Asleep-Where-Do-We-Go')">
                   <mat-icon>play_arrow</mat-icon>
                 </button>
               </div>
-        </div>
-        <div class = "gallery-item"> 
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <div class="gallery-item">
             <img src="https://static.billboard.com/files/media/Chance-the-Rapper-The-Big-Day-album-art-2019-billboard-1240-1024x1024.jpg" style="width:300px;height:300px;" class="gallery-img">
             <div class="button-container">
                 <button mat-fab color="accent" aria-label="Example icon button with a bookmark icon" class="play-button" (click)="this.play('Chance-the-Rapper-The-Big-Day')">
                   <mat-icon>play_arrow</mat-icon>
                 </button>
               </div>
-        </div>
-        <div class = "gallery-item"> 
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <div class="gallery-item">
             <img src="https://static.billboard.com/files/media/cub-sport-cub-sport-album-art-2019-billboard-1240--1024x1024.jpg"  style="width:300px;height:300px;" class="gallery-img">
             <div class="button-container">
                 <button mat-fab color="accent" aria-label="Example icon button with a bookmark icon" class="play-button" (click)="this.play('cub-sport-cub-sport')">
                   <mat-icon>play_arrow</mat-icon>
                 </button>
               </div>
-        </div>
-        <div class = "gallery-item"> 
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <div class="gallery-item">
             <img src="https://static.billboard.com/files/media/Nina-Nesbitt-The-Sun-Will-Come-Up-the-Seasons-Will-Change-album-art-2019-billboard-1240-1024x1024.jpg"  style="width:300px;height:300px;" class="gallery-img">
             <div class="button-container">
                 <button mat-fab color="accent" aria-label="Example icon button with a bookmark icon" class="play-button" (click)="this.play('Nina-Nesbitt-The-Sun-Will-Come-Up-the-Seasons-Will-Change')" >
                   <mat-icon>play_arrow</mat-icon>
                 </button>
               </div>
-        </div>
-        <div class = "gallery-item"> 
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <div class="gallery-item">
             <img src="https://static.billboard.com/files/media/Missy-Elliott-Iconology-album-art-2019-billboard-1240-1024x1024.jpg"  style="width:300px;height:300px;" class="gallery-img">
             <div class="button-container">
                 <button mat-fab color="accent" aria-label="Example icon button with a bookmark icon" class="play-button" (click)="this.play('Missy-Elliott-Iconology')">
                   <mat-icon>play_arrow</mat-icon>
                 </button>
               </div>
-        </div>
-        <div class = "gallery-item"> 
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <div class="gallery-item">
             <img src="https://static.billboard.com/files/media/Jade-Bird-Jade-Bird-album-art-2019-billboard-1240-1024x1024.jpg"  style="width:300px;height:300px;" class="gallery-img">
             <div class="button-container">
                 <button mat-fab color="accent" aria-label="Example icon button with a bookmark icon" class="play-button"  (click)="this.play('Jade-Bird-Jade-Bird')">
                   <mat-icon>play_arrow</mat-icon>
                 </button>
               </div>
-        </div>
-        <div class = "gallery-item"> 
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <div class="gallery-item">
             <img src="https://static.billboard.com/files/media/DaBaby-Kirk-album-art-2019-billboard-1240-1024x1024.jpg"  style="width:300px;height:300px;" class="gallery-img">
             <div class="button-container">
                 <button mat-fab color="accent" aria-label="Example icon button with a bookmark icon" class="play-button" (click)="this.play('DaBaby-Kirk')">
                   <mat-icon>play_arrow</mat-icon>
                 </button>
               </div>
-        </div>
-
-    </div>
-  </ul>
-
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>
     
 
