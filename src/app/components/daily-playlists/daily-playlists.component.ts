@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Playlist } from 'src/app/playlist'; 
+import { PlaylistPopupComponent } from '../playlist-popup/playlist-popup.component';
+import { MatDialog } from '@angular/material/dialog';
 const PLAYLIST_DATA: Playlist[] = [
     {
         playlistID: "1",
@@ -43,6 +45,9 @@ const PLAYLIST_DATA: Playlist[] = [
     },
 ]
 
+
+
+
 @Component({
    templateUrl: './daily-playlists.component.html',
    styleUrls: ['./daily-playlists.component.css'],
@@ -57,5 +62,14 @@ export class DailyPlaylistsComponent {
         //right now just takes in title of the album and sends an alert with the title
         alert(message);
         //once we can conncet to spotify, we can use this to direct to the actual playing of playlists
+    }
+
+    constructor(public dialog: MatDialog) {}
+
+    openPopup(): void {
+       this.dialog.open(PlaylistPopupComponent, {
+           width: '600px',
+       });
+
     }
 }
