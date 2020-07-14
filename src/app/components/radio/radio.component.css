@@ -1,11 +1,24 @@
 table{
-    width: 65%;
-    margin-left: 5%;
+    width: 100%;
+    margin-left: 3%;
     float: left; 
 }
 
+.mat-elevation-z8{
+    height:400px;
+    overflow: auto; 
+}
+.mat-form-field{
+    width: 81%;
+}
 .search{
     float: right; 
-    width: 20%;
-    margin-right: 5%;
+    width: 30%;
+    margin-left: 4%;
+    margin-right: 3%;
+}
+
+.mat-elevation-z6{
+    width: 100%;
+    overflow: auto; 
 }
