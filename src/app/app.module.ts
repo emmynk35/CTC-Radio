@@ -9,11 +9,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RadioComponent } from './components/radio/radio.component';
+import { DailyPlaylistsComponent } from './components/daily-playlists/daily-playlists.component';
+import { PlaylistPopupComponent } from './components/playlist-popup/playlist-popup.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RadioComponent
+    RadioComponent,
+    DailyPlaylistsComponent,
+    PlaylistPopupComponent,
   ],
   imports: [
     BrowserModule,
@@ -22,7 +26,7 @@ import { RadioComponent } from './components/radio/radio.component';
     BrowserAnimationsModule,
     MatToolbarModule,
     MatButtonModule,
-    MatTableModule
+    MatTableModule,
     MatDialogModule,
   ],
   providers: [],

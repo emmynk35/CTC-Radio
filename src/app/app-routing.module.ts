@@ -3,10 +3,14 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AboutComponent } from '../app/components/about/about.component';
 import { RadioComponent } from './components/radio/radio.component';
+import { DailyPlaylistsComponent } from './components/daily-playlists/daily-playlists.component';
+import { PlaylistPopupComponent } from './components/playlist-popup/playlist-popup.component';
 
 const routes: Routes = [
   {path: 'about', component: AboutComponent},
-  {path: 'radio', component: RadioComponent}
+  {path: 'radio', component: RadioComponent},
+  {path: 'daily-playlists', component: DailyPlaylistsComponent},
+  {path: 'playlist-popup', component: PlaylistPopupComponent},
 ];
 
 @NgModule({
