@@ -7,7 +7,7 @@
 .toolbar {
     border-bottom: 1px solid black;
     padding: 0px 40px 0px 40px;
-    height:10%;
+    height: 10%;
 }
 
 a {
@@ -24,4 +24,9 @@ a:hover {
 .login-button {
     margin-left: 50px;
     color: #eeeeee !important;
+}
+
+mat-toolbar {
+    position: sticky;
+    top: 0;
 }
