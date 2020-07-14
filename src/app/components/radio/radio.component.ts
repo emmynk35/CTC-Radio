@@ -23,8 +23,6 @@ const SONG_DATA: Song[] = [
      
 ]
 
-
-
 @Component({
     templateUrl: './radio.component.html',
     styleUrls: ['./radio.component.css'],
@@ -32,6 +30,6 @@ const SONG_DATA: Song[] = [
 })
 
 export class RadioComponent{
-    displayedColumns: string[ ]= [ "albumCoverURL", "Title", "Artist", "Album", "votes"];
+    displayedColumns: string[]= [ "albumCoverURL", "Title", "Artist", "Album", "votes"];
     dataSource = SONG_DATA;
 }
