@@ -32,13 +32,13 @@ const PLAYLIST_DATA: Song[] = [
 export class PlaylistPopupComponent {
    displayedColumns: string[] = ["albumCoverURL", "Title", "Artist", "Album"];
    dataSource = PLAYLIST_DATA;
+
+   onSubmitCreate() {
+      alert("Created Playlist!")
+   }
    playlistID: string;
 
    constructor(
       public dialogRef: MatDialogRef<PlaylistPopupComponent>,
       @Inject(MAT_DIALOG_DATA) public data:any){}
-
-   onNoClick(): void {
-      this.dialogRef.close();
-   }
 }
