@@ -1,4 +1,6 @@
-
+const https = require('https');
+const querystring = require('querystring');
+global.globalAuthFlag = false;
 
 module.exports = (app, db) => {
 
@@ -65,7 +67,51 @@ module.exports = (app, db) => {
                 return res.status(400).json({ error: "incorrect password"});
             }
 
+            req.session.username = username;
+            console.log(req.session.username);
             return res.status(200).json({ successful: "user successfully logged in"});
         }
     )
+
+    app.post (
+        '/auth/signout',
+        async (req, res) => {
+            if(!req.session.username){
+                console.log("need to login");
+                res.redirect('auth/signin');
+            }
+            req.session.reset();
+            res.redirect('/')
+        }
+    )
+
+    app.post (
+        'auth/spotifytoken',
+        async(req, res) => {
+            if(!req.session.username){
+                console.log("need to login");
+                res.redirect('auth/signin');
+            }
+            console.log("got the body:", req.body);
+            //client_id
+            //response_type
+            //redirect_uri
+            //state            ignored for now
+            //scope
+            //show_dialog
+            var httpsString = "";
+            httpsString  = httpsString + "?client_id=" + req.body.client_id + "&response_type=" + req.body.response_type + "&redirect_uri=" + req.body.redirect_uri + "&scope=" + req.body.scope;
+            querystring.encode(httpsString);
+            if(!globalAuthFlag){
+                https.get(httpsString, (res) =>{
+                    
+                })
+            }
+        }
+    )
+
+
+
 }
+
+    

@@ -1,8 +1,10 @@
 const express = require('express');
 const bodyparser = require('body-parser');
+var session = require('express-session');
 const app = express();
 
 app.use(bodyparser.json());
+app.use(session({secret: "Shh, its a secret!"}));
 
 const admin = require('firebase-admin');
 const serviceAccount = require('./config/ctc-radio-eb90386e8175.json');
@@ -18,6 +20,7 @@ auth_routes(app, db);
 app.get(
     '/',
     (req, res) => {
+        console.log(req.session.username);
         return res.status(200).json({ message: "Application is running"});
     }
 )
