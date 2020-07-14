@@ -3,15 +3,12 @@ h2 {
 }
 
 img {
-    width: 8%;
+    width: 50%;
+    padding-top: 5px;
 }
 
 th, td {
     width: 10%;
-}
-
-table, ng-container {
-    background-color: #121212 !important;
 }
 
 td.mat-cell {
@@ -26,4 +23,21 @@ mat-dialog-actions {
 button {
     margin-right: 30px;
     color: #eeeeee !important;
+}
+
+.mat-column-albumCoverURL {
+    width: 8%;
+    align-items: center;
+}
+
+.mat-column-Title {
+    width: 15%;
+}
+
+.cover {
+    justify-items: center;
+}
+
+table {
+    background-color: #121212 !important;
 }

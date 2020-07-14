@@ -1,4 +1,4 @@
-<ng-container #popup>
+<ng-container #popup class="container">
     <h2 mat-dialog-title>CTC Daily Mix - date</h2>
     <mat-dialog-content>
         <table mat-table [dataSource] = "dataSource" class = "mat-elevation-z8"> 
@@ -24,7 +24,7 @@
             
             <ng-container matColumnDef="albumCoverURL">
                 <th mat-header-cell *matHeaderCellDef></th>
-                <td mat-cell *matCellDef="let song"> <img [src]=song.albumCoverURL />  </td>
+                <td mat-cell *matCellDef="let song" class="cover"><img [src]=song.albumCoverURL/></td>
             </ng-container>
             
             <ng-container matColumnDef="timeAdded">
