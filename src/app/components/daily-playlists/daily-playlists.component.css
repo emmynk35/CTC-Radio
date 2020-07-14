@@ -12,3 +12,30 @@
     text-align: center;
     
   }
+  .gallery-item {
+    display: inline-block;
+    position: relative;
+  }
+  
+  .gallery-img {
+    opacity: 1;
+    transition: opacity 0.3s ease-in; /* transition the opacity for nice fade */
+  }
+  .gallery-item:hover .gallery-img {
+    opacity: 0; /* change opacity on wrapper div hover */
+  }
+  .gallery-button {
+    display: block;
+    
+  }
+
+  .play-button {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    cursor: pointer;
+    
+}
