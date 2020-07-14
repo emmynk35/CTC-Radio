@@ -72,4 +72,9 @@ export class DailyPlaylistsComponent {
        });
 
     }
+    //adds new playlist to the beginning of the array
+    addPlaylistToDataSource(playlistId : string, albumCoverURL : string) : void {
+            const data = new Playlist(playlistId, albumCoverURL);
+            this.dataSource.unshift(data);
+    }
 }
