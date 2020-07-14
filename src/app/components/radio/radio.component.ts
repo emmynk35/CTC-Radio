@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Song } from 'src/app/song'; 
+import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 const SONG_DATA: Song[] = [
     {
@@ -32,4 +34,18 @@ const SONG_DATA: Song[] = [
 export class RadioComponent{
     displayedColumns: string[]= [ "albumCoverURL", "Title", "Artist", "Album", "votes"];
     dataSource = SONG_DATA;
-}
+
+    song = new FormControl('');    
+    console.log("hi"); 
+
+    constructor(private router:Router){}
+
+    displayedColumnsSearch: string[]= ["Title", "Artist"];
+    dataSourceSearch = SONG_DATA;
+
+    search(song): void {
+
+    }
+
+    
+}   
