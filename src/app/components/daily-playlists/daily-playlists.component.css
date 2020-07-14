@@ -1,17 +1,9 @@
-.grid-container {
-    display: grid;
-    grid-template-columns: auto auto auto;
-    background-color: #808080;
-    padding: 10px;
-  }
-  .grid-item {
-    background-color: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(0, 0, 0, 0.8);
-    padding: 20px;
-    font-size: 30px;
-    text-align: center;
-    
-  }
+.container {
+    padding: 60px 60px 0px 60px; 
+    color: #eeeeee;
+    height: 100%;
+}
+
   .gallery-item {
     display: inline-block;
     position: relative;
