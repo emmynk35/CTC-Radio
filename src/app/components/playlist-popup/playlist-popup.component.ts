@@ -11,6 +11,8 @@ const PLAYLIST_DATA: Song[] = [
       albumCoverURL: "https://humbernews.ca/wp-content/uploads/2020/01/Mac-Miller.jpg",
       timeAdded: "",
       votes: 1,
+      year: '2020',
+      length: '3:00',
    },
    {
       title: "Hand Me Downs",
@@ -20,6 +22,8 @@ const PLAYLIST_DATA: Song[] = [
       albumCoverURL: "https://humbernews.ca/wp-content/uploads/2020/01/Mac-Miller.jpg",
       timeAdded: "",
       votes: 1,
+      year: '2020',
+      length: '3:00',
    },
 ]
 

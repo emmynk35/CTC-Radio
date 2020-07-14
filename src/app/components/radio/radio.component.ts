@@ -12,7 +12,9 @@ const SONG_DATA: Song[] = [
     trackID: "1",
     albumCoverURL: "https://www.google.com/url?sa=i&url=https%3A%2F%2Farts.duke.edu%2Fnews%2Fmaking-music-matter%2F&psig=AOvVaw3iMhI5zMR4OirXZqEevwgm&ust=1594821774644000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMiNv570zOoCFQAAAAAdAAAAABAD", 
     timeAdded: "",
-    votes: 1
+    votes: 1,
+    year: '2020',
+    length: '3:00',
     },
     {
     title: "this ain't DECAF", 
@@ -21,7 +23,9 @@ const SONG_DATA: Song[] = [
     trackID: "2",
     albumCoverURL: "https://www.google.com/url?sa=i&url=https%3A%2F%2Farts.duke.edu%2Fnews%2Fmaking-music-matter%2F&psig=AOvVaw3iMhI5zMR4OirXZqEevwgm&ust=1594821774644000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMiNv570zOoCFQAAAAAdAAAAABAD", 
     timeAdded: "",
-    votes: 1
+    votes: 1,
+    year: '2020',
+    length: '3:00',
     },
     {
         title: "the sheep goes BAA",

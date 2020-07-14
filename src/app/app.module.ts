@@ -12,10 +12,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RadioComponent } from './components/radio/radio.component';
 import { DailyPlaylistsComponent } from './components/daily-playlists/daily-playlists.component';
 import { PlaylistPopupComponent } from './components/playlist-popup/playlist-popup.component';
-import { MatFormFieldModule, MatFormField } from '@angular/material/form-field';
+import { MusicPlayerComponent } from './components/music-player/music-player.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule} from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
+import { MatProgressBarModule, MatProgressBar } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -23,6 +26,7 @@ import { HttpClientModule } from '@angular/common/http';
     RadioComponent,
     DailyPlaylistsComponent,
     PlaylistPopupComponent,
+    MusicPlayerComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +43,8 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     MatInputModule,
     HttpClientModule,
+    MatCardModule,
+    MatProgressBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
