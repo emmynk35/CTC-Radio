@@ -4,6 +4,6 @@ export interface Song{
     title: string; 
     albumName: string; 
     artist: string; 
-    timeAdded: Date;
+    timeAdded: string;
     votes: number; 
 }
