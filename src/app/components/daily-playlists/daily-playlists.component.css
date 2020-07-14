@@ -21,6 +21,17 @@
     
   }
 
+  .top-left {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    padding: 10px 0px 0px 10px; 
+    width:290px;
+    height:35px;
+    background-color: rgb(59, 58, 58);
+    opacity: .8;
+    /* background-image: url('https://images.pexels.com/photos/1329917/pexels-photo-1329917.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'); */
+  }
   .play-button {
     position: absolute;
     margin: auto;
