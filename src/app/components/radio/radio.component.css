@@ -1,3 +1,11 @@
-table {
-    width: 100%;
+table{
+    width: 70%;
+    margin-left: 5%;
+    float: left; 
+}
+
+.search{
+    float: right; 
+    width: 15%;
+    margin-right: 5%;
 }

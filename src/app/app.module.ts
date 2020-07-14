@@ -12,6 +12,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RadioComponent } from './components/radio/radio.component';
 import { DailyPlaylistsComponent } from './components/daily-playlists/daily-playlists.component';
 import { PlaylistPopupComponent } from './components/playlist-popup/playlist-popup.component';
+import { MatFormFieldModule, MatFormField } from '@angular/material/form-field';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -30,6 +33,10 @@ import { PlaylistPopupComponent } from './components/playlist-popup/playlist-pop
     MatIconModule,
     MatTableModule,
     MatDialogModule,
+    FormsModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
