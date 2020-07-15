@@ -86,7 +86,7 @@ module.exports = (app, db) => {
         }
     )
 
-    /*app.post (
+    app.post (
         'auth/spotifytoken',
         async(req, res) => {
             if(!req.session.username){
@@ -104,12 +104,23 @@ module.exports = (app, db) => {
             httpsString  = httpsString + "?client_id=" + req.body.client_id + "&response_type=" + req.body.response_type + "&redirect_uri=" + req.body.redirect_uri + "&scope=" + req.body.scope;
             querystring.encode(httpsString);
             if(!globalAuthFlag){
-                https.get(httpsString, (res) =>{
+                https.get(httpsString, (res) => {
+                    let data = '';
 
-                })
+                    resp.on('data', (chunk)=>{
+                        data += chunk;
+                    });
+                    
+                    resp.on('end', () => {
+                        console.log(JSON.parse(data).explanation);
+                    });
+                    
+                }).on("error", (err) => {
+                    console.log("Error: " + err.message);
+                });
             }
         }
-    )*/
+    )
 
 
 
