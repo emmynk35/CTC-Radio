@@ -20,11 +20,14 @@ import { MatInputModule} from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
 import { MatProgressBarModule, MatProgressBar } from '@angular/material/progress-bar';
 import { RadioAddSongComponent } from './components/radio/radio-addSong.component';
+import { LoginComponent } from './components/login/login.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     RadioComponent,
+    LoginComponent,
     DailyPlaylistsComponent,
     PlaylistPopupComponent,
     MusicPlayerComponent,
@@ -47,6 +50,7 @@ import { RadioAddSongComponent } from './components/radio/radio-addSong.componen
     HttpClientModule,
     MatCardModule,
     MatProgressBarModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
