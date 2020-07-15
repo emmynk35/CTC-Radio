@@ -36,10 +36,7 @@ const PLAYLIST_DATA: Song[] = [
 export class PlaylistPopupComponent {
    displayedColumns: string[] = ["albumCoverURL", "Title", "Artist", "Album"];
    dataSource = PLAYLIST_DATA;
-
-   onSubmitCreate() {
-      alert("Created Playlist!")
-   }
+   currDate = new Date().toLocaleString().split(',')[0];
    playlistID: string;
 
    constructor(

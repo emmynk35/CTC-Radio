@@ -10,6 +10,8 @@ export class SpotifyService {
   private albumUrl: string;
   private clientId: string = 'ad959a319ba14a81a4f1950d46f49aee';
   private clientSecret: string = '201ad462d8c64353bd52c5ad8ecb2bfe';
+  private songUrl: string;
+  private playlistUrl: string;
   private body: any;
 
 
@@ -69,7 +71,7 @@ export class SpotifyService {
   }
 
   // Get Tracks in ablum selected
-   getAlbum(id: string, authToken: string) {
+  getAlbum(id: string, authToken: string) {
     let headers = new HttpHeaders({
         'Authorization': 'Bearer'+authToken,
     });
@@ -79,6 +81,21 @@ export class SpotifyService {
     return this._http.get(this.albumUrl, { headers: headers });
   }
 
-  
-  
+  getTrack(id: string, authToken: string) {
+    let headers = new HttpHeaders({
+      'Authorization': 'Bearer'+authToken,
+    });
+    this.songUrl = 'https://api.spotify.com/v1/tracks/' + id;
+    return this._http.get(this.songUrl, {headers: headers});
+  }
+
+  getPlaylist(id: string, authToken: string) {
+    let headers = new HttpHeaders({
+      'Authorization': 'Bearer'+authToken,
+    });
+    this.playlistUrl = 'https://api.spotify.com/v1/playlists/' + id;
+    return this._http.get(this.playlistUrl, {headers: headers}); 
+  }
+
+  //createPlaylist()
 }
