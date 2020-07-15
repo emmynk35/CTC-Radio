@@ -1,37 +1,23 @@
-import { Component } from '@angular/core';
-import { Song } from 'src/app/song';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-const SONG_DATA: Song[] = [
-    {
-    title: "the sheep goes BAA",
-    artist: "Jacob Rubin",
-    albumName:"The Musical Alphabet",
-    trackID: "1",
-    albumCoverURL: "https://www.google.com/url?sa=i&url=https%3A%2F%2Farts.duke.edu%2Fnews%2Fmaking-music-matter%2F&psig=AOvVaw3iMhI5zMR4OirXZqEevwgm&ust=1594821774644000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMiNv570zOoCFQAAAAAdAAAAABAD", 
-    timeAdded: "",
-    votes: 1,
-    year: '2020',
-    length: '3:00',
-    },
-    {
-    title: "this ain't DECAF", 
-    artist: "Jacob Rubin",
-    albumName: "The Musical Alphabet",
-    trackID: "2",
-    albumCoverURL: "https://www.google.com/url?sa=i&url=https%3A%2F%2Farts.duke.edu%2Fnews%2Fmaking-music-matter%2F&psig=AOvVaw3iMhI5zMR4OirXZqEevwgm&ust=1594821774644000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMiNv570zOoCFQAAAAAdAAAAABAD", 
-    timeAdded: "",
-    votes: 1,
-    year: '2020',
-    length: '3:00',
-    },
-     
-]
 @Component({
-    templateUrl: './radio-addSong.component.html',
-    styleUrls: ['./radio-addSong.component.css']
+   templateUrl: './radio-addSong.component.html',
+   styleUrls: ['./radio-addSong.component.css'],
+   selector: 'radio-addSong',
 })
 
-export class RadioAddSongComponent{
-    displayedColumns: string[] = ["Title","Artist"];
-    dataSource = SONG_DATA; 
+export class RadioAddSongComponent implements OnInit{
+   onSubmitCreate() {
+      alert("Added to Queue!")
+      //TODO: CREATE POST ENDPOINT TO ADD DATA.TRACK_ID TO QUEUE!
+   }
+
+   constructor(
+    public dialogRef: MatDialogRef<RadioAddSongComponent>,
+    @Inject(MAT_DIALOG_DATA) public data:any){}
+
+    ngOnInit(){
+        console.log(this.data);
+    }
 }

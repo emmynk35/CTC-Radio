@@ -1,22 +1,20 @@
+<div class="music-player">
+  <music-player></music-player>
+</div>
+
 <div class="search">
   <mat-form-field appearance="standard">
   <mat-label> Search </mat-label>
   <input matInput [formControl] = "song">
   </mat-form-field>
   <button mat-button color="primary" (click)="search()"> Search </button>
-  <div [hidden]="isHidden" class="mat-elevation-z6">
+  
+  <div [hidden]="isHidden" class="mat-elevation-z0">
     <table mat-table [dataSource] = "dataSourceSearch" > 
-      <ng-container matColumnDef="actions">
-        <mat-header-cell *matHeaderCellDef></mat-header-cell>
-        <mat-cell *matCellDef="let row">
-          <button mat-icon-button color="primary" aria-label="Example icon button with a bookmark icon" class="play-button" (click)="openPopup()">
-            <mat-icon>add</mat-icon>
-          </button>
-        </mat-cell>
-      </ng-container>
+      
 
       <ng-container matColumnDef="Title">
-           <th mat-header-cell *matHeaderCellDef>title </th>
+           <th mat-header-cell *matHeaderCellDef>Title </th>
            <td mat-cell *matCellDef="let song"> {{song.title}} </td>
          </ng-container>
        
@@ -29,15 +27,25 @@
            <th mat-header-cell *matHeaderCellDef> Album </th>
            <td mat-cell *matCellDef="let song"> {{song.albumName}} </td>
          </ng-container>
-       
+         
+         <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let row">
+            <button mat-icon-button color="primary" aria-label="Example icon button with a bookmark icon" 
+            class="add-button" (click)="openPopup(row.trackID, row.title, row.artist)">
+              <mat-icon>add</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+  
          <ng-container matColumnDef="TrackID">
-           <th mat-header-cell *matHeaderCellDef> trackID </th>
+           <th mat-header-cell *matHeaderCellDef> TrackID </th>
            <td mat-cell *matCellDef="let song"> {{song.trackID}} </td>
          </ng-container>
          
          <ng-container matColumnDef="albumCoverURL">
-           <th mat-header-cell *matHeaderCellDef> albumCoverURL </th>
-           <td mat-cell *matCellDef="let song"> <img [src]= song.albumCoverURL style="width:30px;height:30px;">  </td>
+           <th mat-header-cell *matHeaderCellDef></th>
+           <td mat-cell *matCellDef="let song"> <img [src]= song.albumCoverURL />  </td>
          </ng-container>
        
        <ng-container matColumnDef="timeAdded">
@@ -51,16 +59,16 @@
          </ng-container>
     
     
-         <tr mat-header-row *matHeaderRowDef="displayedColumnsSearch"></tr>
-         <tr mat-row *matRowDef="let row; columns: displayedColumnsSearch;"></tr>
+         <tr mat-header-row *matHeaderRowDef="displayedColumnsSearch; sticky: true;"></tr>
+         <tr mat-row *matRowDef="let row; columns: displayedColumnsSearch; "></tr>
     </table>
   </div>
 </div>  
 
-<div class="mat-elevation-z8">
+<div class="queue mat-elevation-z0">
   <table mat-table [dataSource] = "dataSource" > 
     <ng-container matColumnDef="Title">
-         <th mat-header-cell *matHeaderCellDef>title </th>
+         <th mat-header-cell *matHeaderCellDef> Title </th>
          <td mat-cell *matCellDef="let song"> {{song.title}} </td>
        </ng-container>
      
@@ -80,7 +88,7 @@
        </ng-container>
        
        <ng-container matColumnDef="albumCoverURL">
-         <th mat-header-cell *matHeaderCellDef> albumCoverURL </th>
+         <th mat-header-cell *matHeaderCellDef></th>
          <td mat-cell *matCellDef="let song"> <img [src]= song.albumCoverURL style="width:30px;height:30px;">  </td>
        </ng-container>
      
@@ -95,7 +103,7 @@
        </ng-container>
   
   
-       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;"></tr>
        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 </div>
