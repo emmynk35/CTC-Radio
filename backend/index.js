@@ -20,6 +20,7 @@ auth_routes(app, db);
 app.get(
     '/',
     (req, res) => {
+        console.log("Index page")
         console.log(req.session.username);
         return res.status(200).json({ message: "Application is running"});
     }

@@ -80,12 +80,13 @@ module.exports = (app, db) => {
                 console.log("need to login");
                 res.redirect('auth/signin');
             }
-            req.session.reset();
+            console.log("destroying session")
+            req.session.destroy();
             res.redirect('/')
         }
     )
 
-    app.post (
+    /*app.post (
         'auth/spotifytoken',
         async(req, res) => {
             if(!req.session.username){
@@ -104,11 +105,11 @@ module.exports = (app, db) => {
             querystring.encode(httpsString);
             if(!globalAuthFlag){
                 https.get(httpsString, (res) =>{
-                    
+
                 })
             }
         }
-    )
+    )*/
 
 
 
