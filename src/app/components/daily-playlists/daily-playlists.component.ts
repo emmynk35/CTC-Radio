@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Playlist } from 'src/app/playlist'; 
 import { PlaylistPopupComponent } from '../playlist-popup/playlist-popup.component';
 import { MatDialog } from '@angular/material/dialog';
+import { OnInit } from '@angular/core';
 const PLAYLIST_DATA: Playlist[] = [
     {
         playlistID: "1",
@@ -66,8 +67,56 @@ const PLAYLIST_DATA: Playlist[] = [
 
 
 
-export class DailyPlaylistsComponent {
+export class DailyPlaylistsComponent implements OnInit{
     dataSource = PLAYLIST_DATA;
+    breakpoint;
+    albumWidth;
+    albumHeight;
+    
+    ngOnInit() {
+        if(window.innerWidth >= 1801)
+        {
+            this.breakpoint = 5;
+        }
+        else if(window.innerWidth >= 1501 && window.innerWidth <= 1800)
+        {
+            this.breakpoint = 4;
+        }
+        else if( window.innerWidth >= 1201 && window.innerWidth <=1500)
+        {
+            this.breakpoint = 3;
+        }
+        else if (window.innerWidth >= 900 && window.innerWidth <= 1200)
+        {
+            this.breakpoint = 2;
+        }
+        else {
+            this.breakpoint = 1;
+        }
+    }
+    
+    onResize(event) {
+      if(event.target.innerWidth >= 1801)
+      {
+          this.breakpoint = 5;
+      }
+      else if(event.target.innerWidth >= 1501 && window.innerWidth <= 1800)
+      {
+          this.breakpoint = 4;
+      }
+      else if(event.target.innerWidth >= 1201 && window.innerWidth <=1500)
+      {
+          this.breakpoint = 3;
+      }
+      else if (event.target.innerWidth >= 900 && window.innerWidth <= 1200)
+      {
+          this.breakpoint = 2;
+      }
+      else {
+          this.breakpoint = 1;
+      }
+    }
+    
     public play(message : string){
         //right now just takes in title of the album and sends an alert with the title
         alert(message);
