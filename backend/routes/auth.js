@@ -97,14 +97,7 @@ module.exports = (app, db) => {
                 return;
             }
             const tokenRef= db.collection('spotify').doc('tokens');
-            const refreshToken = tokenRef.get("refresh_token");
             const token = tokenRef.get("token");
-
-            var form = {
-                "grant_type": "refresh_token",
-                "refresh_token": refreshToken
-            };
-
 
             const options = {
                 headers: {'Content-Type': 'application/x-www-form-urlencoded','Authorization': 'Basic YWQ5NTlhMzE5YmExNGE4MWE0ZjE5NTBkNDZmNDlhZWU6MjAxYWQ0NjJkOGM2NDM1M2JkNTJjNWFkOGVjYjJiZmU='}
@@ -137,10 +130,16 @@ module.exports = (app, db) => {
         '/auth/token',
         async (req, res) => {
             const tokenRef= db.collection('spotify').doc('tokens');
-            const refreshToken = await tokenRef.get("refresh_token");
-            const token = await tokenRef.get("token");
+            const doc = await tokenRef.get();
+            if (!doc.exists) {
+                console.log('doc does not exist');
+                return res.status(400).json({ error: "doc does not exist"});
+            }
 
-            return resp.status(200).json({ token: token, refreshToken: refreshToken});
+            var token = doc.get("token");
+            var refresh_token = doc.get("refresh_token");
+
+            return res.status(200).json({ token: token});
         }
     )
 
