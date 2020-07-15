@@ -127,7 +127,8 @@ export class DailyPlaylistsComponent implements OnInit{
 
     openPopup(): void {
        this.dialog.open(PlaylistPopupComponent, {
-           width: '600px',
+           width: '90vh',
+           maxHeight: '90vh',
        });
 
     }

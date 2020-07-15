@@ -41,61 +41,79 @@ export class SpotifyService {
   }
 
   // Get search results for song
-  searchSong(keyword: string, type = 'track', authToken: string) {
+  searchSong(keyword: string, type = 'track', limit: number, authToken: string) {
       let headers = new HttpHeaders({
         'Authorization': 'Bearer'+authToken,
       });
-      this.searchUrl = 'https://api.spotify.com/v1/search?Q=' + keyword + '&type=' + type + '&market=US';
+      this.searchUrl = 'https://api.spotify.com/v1/search?Q='+keyword+'&type='+type+'&market=US&limit='+limit;
       return this._http.get(this.searchUrl, {headers:headers});
   }
 
-  // Get data about artist that has been chosen to view
-  getArtist(id: string, authToken: string) {
+  // Get data about artist
+  getArtist(artist_id: string, authToken: string) {
     let headers = new HttpHeaders({
         'Authorization': 'Bearer'+authToken,
     });
 
-    this.artistUrl = 'https://api.spotify.com/v1/artists/' + id;
+    this.artistUrl = 'https://api.spotify.com/v1/artists/' + artist_id;
     return this._http.get(this.artistUrl, { headers: headers });
   }
 
-  // Get the albums about the artist that has been chosen
-  getAlbums(id: string, authToken: string) {
-    let headers = new HttpHeaders({
-        'Authorization': 'Bearer'+authToken,
-    });
-
-    this.albumsUrl = 'https://api.spotify.com/v1/artists/' + id + '/albums?market=US&album_type=single';
-
-    return this._http.get(this.albumsUrl, { headers: headers });
-  }
-
   // Get Tracks in ablum selected
-  getAlbum(id: string, authToken: string) {
+  getAlbum(album_id: string, authToken: string) {
     let headers = new HttpHeaders({
         'Authorization': 'Bearer'+authToken,
     });
 
-    this.albumUrl = 'https://api.spotify.com/v1/albums/' + id;
+    this.albumUrl = 'https://api.spotify.com/v1/albums/' + album_id + '/tracks';
 
     return this._http.get(this.albumUrl, { headers: headers });
   }
 
-  getTrack(id: string, authToken: string) {
+  // get info of a track
+  getTrack(track_id: string, authToken: string) {
     let headers = new HttpHeaders({
       'Authorization': 'Bearer'+authToken,
     });
-    this.songUrl = 'https://api.spotify.com/v1/tracks/' + id;
+    this.songUrl = 'https://api.spotify.com/v1/tracks/' + track_id;
     return this._http.get(this.songUrl, {headers: headers});
   }
 
-  getPlaylist(id: string, authToken: string) {
+  //get info from all tracks in a playlist
+  getPlaylist(playlist_id: string, authToken: string) {
     let headers = new HttpHeaders({
       'Authorization': 'Bearer'+authToken,
     });
-    this.playlistUrl = 'https://api.spotify.com/v1/playlists/' + id;
+    this.playlistUrl = 'https://api.spotify.com/v1/playlists/' + playlist_id + '/tracks';
     return this._http.get(this.playlistUrl, {headers: headers}); 
   }
 
-  //createPlaylist()
+  // create playlist on emily's account (for now)
+  createPlaylist(user_id: string, playlist_name:string, authToken: string) {
+    let headers = new HttpHeaders({
+      'Authorization': 'Bearer'+authToken,
+      'Content-Type': 'application/json'
+    });
+    let body = {
+      'name': playlist_name,
+      'description': 'Created by CTC Radio',
+      'public': 'true'
+    };
+    this.playlistUrl = 'https://api.spotify.com/v1/users/' + user_id + '/playlists';
+    return this._http.post(this.playlistUrl, body, {headers: headers});
+  }
+
+  // can add one or more tracks to specified playlist.
+  addTracksToPlaylist(playlist_id: string, uris: string[], authToken: string) {
+    let headers = new HttpHeaders({
+      'Authorization': 'Bearer'+authToken,
+      'Content-Type': 'application/json'
+    });
+    let body = {
+      'uris': uris
+    }
+    this.playlistUrl = 'https://api.spotify.com/v1/playlists/'+playlist_id+'/tracks';
+    return this._http.post(this.playlistUrl, body, {headers: headers});
+  }
+
 }
