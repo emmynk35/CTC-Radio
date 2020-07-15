@@ -93,7 +93,7 @@ module.exports = (app, db) => {
         async (req, resp) => {
             if(!req.session.username){
                 console.log("need to login");
-                res.redirect('/');
+                resp.redirect('/');
                 return;
             }
             const tokenRef= db.collection('spotify').doc('tokens');
@@ -129,6 +129,11 @@ module.exports = (app, db) => {
     app.get(
         '/auth/token',
         async (req, res) => {
+            if(!req.session.username){
+                console.log("need to login");
+                res.redirect('/');
+                return;
+            }
             const tokenRef= db.collection('spotify').doc('tokens');
             const doc = await tokenRef.get();
             if (!doc.exists) {
