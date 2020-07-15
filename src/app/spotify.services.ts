@@ -4,19 +4,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable()
 export class SpotifyService {
-  private searchUrl: string;
-  private artistUrl: string;
-  private albumsUrl: string;
-  private albumUrl: string;
+  private url: string;
   private clientId: string = 'ad959a319ba14a81a4f1950d46f49aee';
   private clientSecret: string = '201ad462d8c64353bd52c5ad8ecb2bfe';
-  private songUrl: string;
-  private playlistUrl: string;
   private body: any;
 
 
   constructor(private _http: HttpClient) { }
-
 
   // Get access token from Spotify to use API
   refreshAuth = () => {
@@ -45,8 +39,8 @@ export class SpotifyService {
       let headers = new HttpHeaders({
         'Authorization': 'Bearer'+authToken,
       });
-      this.searchUrl = 'https://api.spotify.com/v1/search?Q='+keyword+'&type='+type+'&market=US&limit='+limit;
-      return this._http.get(this.searchUrl, {headers:headers});
+      this.url = 'https://api.spotify.com/v1/search?Q='+keyword+'&type='+type+'&market=US&limit='+limit;
+      return this._http.get(this.url, {headers:headers});
   }
 
   // Get data about artist
@@ -55,8 +49,8 @@ export class SpotifyService {
         'Authorization': 'Bearer'+authToken,
     });
 
-    this.artistUrl = 'https://api.spotify.com/v1/artists/' + artist_id;
-    return this._http.get(this.artistUrl, { headers: headers });
+    this.url = 'https://api.spotify.com/v1/artists/' + artist_id;
+    return this._http.get(this.url, { headers: headers });
   }
 
   // Get Tracks in ablum selected
@@ -65,9 +59,9 @@ export class SpotifyService {
         'Authorization': 'Bearer'+authToken,
     });
 
-    this.albumUrl = 'https://api.spotify.com/v1/albums/' + album_id + '/tracks';
+    this.url = 'https://api.spotify.com/v1/albums/' + album_id + '/tracks';
 
-    return this._http.get(this.albumUrl, { headers: headers });
+    return this._http.get(this.url, { headers: headers });
   }
 
   // get info of a track
@@ -75,8 +69,8 @@ export class SpotifyService {
     let headers = new HttpHeaders({
       'Authorization': 'Bearer'+authToken,
     });
-    this.songUrl = 'https://api.spotify.com/v1/tracks/' + track_id;
-    return this._http.get(this.songUrl, {headers: headers});
+    this.url = 'https://api.spotify.com/v1/tracks/' + track_id;
+    return this._http.get(this.url, {headers: headers});
   }
 
   //get info from all tracks in a playlist
@@ -84,8 +78,8 @@ export class SpotifyService {
     let headers = new HttpHeaders({
       'Authorization': 'Bearer'+authToken,
     });
-    this.playlistUrl = 'https://api.spotify.com/v1/playlists/' + playlist_id + '/tracks';
-    return this._http.get(this.playlistUrl, {headers: headers}); 
+    this.url = 'https://api.spotify.com/v1/playlists/' + playlist_id + '/tracks';
+    return this._http.get(this.url, {headers: headers}); 
   }
 
   // create playlist on emily's account (for now)
@@ -99,8 +93,8 @@ export class SpotifyService {
       'description': 'Created by CTC Radio',
       'public': 'true'
     };
-    this.playlistUrl = 'https://api.spotify.com/v1/users/' + user_id + '/playlists';
-    return this._http.post(this.playlistUrl, body, {headers: headers});
+    this.url = 'https://api.spotify.com/v1/users/' + user_id + '/playlists';
+    return this._http.post(this.url, body, {headers: headers});
   }
 
   // can add one or more tracks to specified playlist.
@@ -112,8 +106,31 @@ export class SpotifyService {
     let body = {
       'uris': uris
     }
-    this.playlistUrl = 'https://api.spotify.com/v1/playlists/'+playlist_id+'/tracks';
-    return this._http.post(this.playlistUrl, body, {headers: headers});
+    this.url = 'https://api.spotify.com/v1/playlists/'+playlist_id+'/tracks';
+    return this._http.post(this.url, body, {headers: headers});
+  }
+
+  //add track to queue on your spotify
+  addTracktoQueue(uri:string, authToken: string){
+    let headers = new HttpHeaders({
+      'Authorization': 'Bearer'+authToken,
+    });
+    this.url = 'https://api.spotify.com/v1/me/player/queue?uri='+uri;
+    return this._http.post(this.url, {headers: headers});
+  }
+
+  //change queue order
+  updateQueue(authToken:string) {
+    
+  }
+
+  //change volume of currently playing song. volume goes from 0 - 100. mute is 0.
+  changeVolume(volume: string, authToken: string) {
+    let headers = new HttpHeaders({
+      'Authorization': 'Bearer'+authToken,
+    });
+    this.url = 'https://api.spotify.com/v1/me/player/volume?volume_percent='+volume;
+    return this._http.put(this.url, {headers: headers});
   }
 
 }
