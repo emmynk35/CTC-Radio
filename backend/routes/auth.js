@@ -1,5 +1,6 @@
 const https = require('https');
 const querystring = require('querystring');
+const request = require('request');
 global.globalAuthFlag = false;
 
 module.exports = (app, db) => {
@@ -78,7 +79,8 @@ module.exports = (app, db) => {
         async (req, res) => {
             if(!req.session.username){
                 console.log("need to login");
-                res.redirect('auth/signin');
+                res.redirect('/auth/signin');
+                return;
             }
             console.log("destroying session")
             req.session.destroy();
@@ -87,42 +89,62 @@ module.exports = (app, db) => {
     )
 
     app.post (
-        'auth/spotifytoken',
-        async(req, res) => {
+        '/auth/spotifytoken',
+        async (req, resp) => {
             if(!req.session.username){
                 console.log("need to login");
-                res.redirect('auth/signin');
+                res.redirect('/');
+                return;
             }
-            console.log("got the body:", req.body);
-            //client_id
-            //response_type
-            //redirect_uri
-            //state            ignored for now
-            //scope
-            //show_dialog
-            var httpsString = "";
-            httpsString  = "https://accounts.spotify.com/authorize?client_id=ad959a319ba14a81a4f1950d46f49aee&response_type=code&redirect_uri=https%3A%2F%2Fexample.com%2Fcallback&scope=user-read-private%20user-read-email&state=34fFs29kd09";
-            //querystring.encode(httpsString);
-            if(!globalAuthFlag){
-                https.get(httpsString, (res) => {
-                    let data = '';
+            const tokenRef= db.collection('spotify').doc('tokens');
+            const refreshToken = tokenRef.get("refresh_token");
+            const token = tokenRef.get("token");
 
-                    resp.on('data', (chunk)=>{
-                        data += chunk;
-                    });
-                    
-                    resp.on('end', () => {
-                        console.log(JSON.parse(data).explanation);
-                    });
+            var form = {
+                "grant_type": "refresh_token",
+                "refresh_token": refreshToken
+            };
 
-                }).on("error", (err) => {
-                    console.log("Error: " + err.message);
+
+            const options = {
+                headers: {'Content-Type': 'application/x-www-form-urlencoded','Authorization': 'Basic YWQ5NTlhMzE5YmExNGE4MWE0ZjE5NTBkNDZmNDlhZWU6MjAxYWQ0NjJkOGM2NDM1M2JkNTJjNWFkOGVjYjJiZmU='}
+            };
+
+            data = {grant_type: "refresh_token", refresh_token: "AQCx9H9VyD0X3INmafleqgpYSx9OnVMhlQRxr1PMrtSKaA5E2hMHje2FlXHn82xrt5yp8HB_iS2M9vCopj5kmWB_-iUkw26jTmAMs0J-XCEMsWo6aD9uI-yG3gp4tnQ142w"};
+
+            const axios = require('axios')
+            axios.post('https://accounts.spotify.com/api/token', querystring.stringify(data), options)
+            .then((res) => {
+                console.log(`statusCode: ${res.statusCode}`)
+                console.log(res)
+                return res;
+            })
+            .then((res) => {
+                console.log("adding new user to the DB");
+                const newUserRef = db.collection('spotify').doc("tokens");
+                newUserRef.set({
+                    'token': res.data.access_token,
                 });
-            }
+                return resp.status(200).json({ successful: "access token set"});
+            })
+            .catch((error) => {
+                console.error(error)
+            })
         }
     )
 
+    app.get(
+        '/auth/token',
+        async (req, res) => {
+            const tokenRef= db.collection('spotify').doc('tokens');
+            const refreshToken = await tokenRef.get("refresh_token");
+            const token = await tokenRef.get("token");
 
+            return resp.status(200).json({ token: token, refreshToken: refreshToken});
+        }
+    )
+
+   
 
 }
 
