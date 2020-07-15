@@ -20,6 +20,7 @@ export class AppComponent implements OnInit{
   openLogin(): void {
     this.dialog.open(LoginComponent, {
         width: '600px',
+        panelClass: 'my-dialog',
     });
   }
 }

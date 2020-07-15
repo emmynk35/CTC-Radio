@@ -20,16 +20,25 @@ import {ErrorStateMatcher} from '@angular/material/core';
  export class LoginComponent {
 
     hide = true;
- 
+    
+    password = new FormControl('');
+    emailFormControl = new FormControl('', [
+        Validators.required,
+        Validators.email,
+      ]);
+
+      matcher = new MyErrorStateMatcher();
     constructor(
        public dialogRef: MatDialogRef<LoginComponent>,
        @Inject(MAT_DIALOG_DATA) public data:any){}
 
-       emailFormControl = new FormControl('', [
-        Validators.required,
-        Validators.email,
-      ]);
+    public onSubmitLogin(){
+        this.hide = false;
+        alert("email: "+this.emailFormControl.value+ "    password: "+this.password.value);
+            
+
+    }
     
-       matcher = new MyErrorStateMatcher();
+      
 
  }

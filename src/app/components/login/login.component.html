@@ -1,4 +1,5 @@
-<h4>Sign In</h4>
+
+<h4>Login</h4>
 <form class="example-form">
     <mat-form-field class="example-full-width">
       <mat-label>Email</mat-label>
@@ -15,10 +16,16 @@
     <br>
     <mat-form-field class="example-full-width">
         <mat-label>Password</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'">
+        <input matInput [type]="hide ? 'password' : 'text'" matInput [formControl]="password">
         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
-      </mat-form-field>
-
+    </mat-form-field>
+    <mat-dialog-actions>
+        <div class="button-holder">
+            <button mat-flat-button color="primary" (click)="onSubmitLogin()" >Login</button>
+            <button mat-flat-button color="primary" (click)="onCreateNewAccount()" >Sign Up</button>
+            <button mat-flat-button mat-dialog-close color="primary" mat-dialog-close>Close</button>
+        </div>
+    </mat-dialog-actions>
   </form>
