@@ -4,7 +4,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogActions } from '@angular/material/dialog';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,6 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule} from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
 import { MatProgressBarModule, MatProgressBar } from '@angular/material/progress-bar';
+import { RadioAddSongComponent } from './components/radio/radio-addSong.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { MatProgressBarModule, MatProgressBar } from '@angular/material/progress
     DailyPlaylistsComponent,
     PlaylistPopupComponent,
     MusicPlayerComponent,
+    RadioAddSongComponent,
   ],
   imports: [
     BrowserModule,
