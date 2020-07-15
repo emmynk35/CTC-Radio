@@ -119,6 +119,11 @@ export class SpotifyService {
     return this._http.post(this.url, {headers: headers});
   }
 
+  //change queue order
+  updateQueue(authToken:string) {
+    
+  }
+
   //change volume of currently playing song. volume goes from 0 - 100. mute is 0.
   changeVolume(volume: string, authToken: string) {
     let headers = new HttpHeaders({
