@@ -101,8 +101,8 @@ module.exports = (app, db) => {
             //scope
             //show_dialog
             var httpsString = "";
-            httpsString  = httpsString + "?client_id=" + req.body.client_id + "&response_type=" + req.body.response_type + "&redirect_uri=" + req.body.redirect_uri + "&scope=" + req.body.scope;
-            querystring.encode(httpsString);
+            httpsString  = "https://accounts.spotify.com/authorize?client_id=ad959a319ba14a81a4f1950d46f49aee&response_type=code&redirect_uri=https%3A%2F%2Fexample.com%2Fcallback&scope=user-read-private%20user-read-email&state=34fFs29kd09";
+            //querystring.encode(httpsString);
             if(!globalAuthFlag){
                 https.get(httpsString, (res) => {
                     let data = '';
@@ -114,7 +114,7 @@ module.exports = (app, db) => {
                     resp.on('end', () => {
                         console.log(JSON.parse(data).explanation);
                     });
-                    
+
                 }).on("error", (err) => {
                     console.log("Error: " + err.message);
                 });
