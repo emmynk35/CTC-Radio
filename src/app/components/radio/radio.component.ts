@@ -1,114 +1,38 @@
-import { Component, Renderer2, Inject } from '@angular/core';
+
+import { Component, Renderer2, Inject, OnInit } from '@angular/core';
 import { Song } from 'src/app/song'; 
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RadioAddSongComponent } from './radio-addSong.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatDialogActions }  from '@angular/material/dialog';
+import { Track } from 'src/app/track';
+import { TrackTest} from 'src/app/trackTest';
+import { MatTableDataSource } from '@angular/material/table';
+import { SpotifyService } from 'src/app/spotify.services';
+import { TrackDummy } from 'src/app/trackDummy';
 import { inject } from '@angular/core/testing';
 //import { SpotifyService } from 'src/app/spotify.services';
-
-const SONG_DATA: Song[] = [
+const TOKEN: string ="BQAwe8h0J3_840xZ8WgToc78GurxPL4xCVm3hteGZmZMlE5_DZF-nqaBlVzqhrwPI4uUfqVqHpOiZ8GNOcH_qtVdYgQinEOc-cuV3gQClDazCca-F5TX3nHNEB__YgEL10iTHy89SA64KnXgIQ";
+const SONG_DATA: TrackDummy[] = [
     {
-    title: "the sheep goes BAA",
-    artist: "Jacob Rubin",
-    albumName:"The Musical Alphabet",
-    trackID: "1",
-    albumCoverURL: "https://humbernews.ca/wp-content/uploads/2020/01/Mac-Miller.jpg", 
-    timeAdded: "",
-    votes: 1, 
-    year: "2020",
-    length: "2"
+    name: "the sheep goes BAA",
+    artists: [{name:"Jacob Rubin", id: "", uri:"", type: "artist"}],
+    album: {name:"The Musical Alphabet", id: "", images:[{width: 300,height: 300, url: "https://humbernews.ca/wp-content/uploads/2020/01/Mac-Miller.jpg"}]},
+    id: "1",
     },
     {
-    title: "this ain't DECAF", 
-    artist: "Jacob Rubin",
-    albumName: "The Musical Alphabet",
-    trackID: "2",
-    albumCoverURL: "https://www.google.com/url?sa=i&url=https%3A%2F%2Farts.duke.edu%2Fnews%2Fmaking-music-matter%2F&psig=AOvVaw3iMhI5zMR4OirXZqEevwgm&ust=1594821774644000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMiNv570zOoCFQAAAAAdAAAAABAD", 
-    timeAdded: "",
-    votes: 1, 
-    year: "2020",
-    length: "2"
-    },
+        name: "the sheep goes BAA",
+        artists: [{name:"Jacob Rubin", id: "", uri:"", type: "artist"}],
+        album: {name:"The Musical Alphabet", id: "", images:[{width: 300,height: 300, url: "https://humbernews.ca/wp-content/uploads/2020/01/Mac-Miller.jpg"}]},
+        id: "1",
+        },
     {
-        title: "the sheep goes BAA",
-        artist: "Jacob Rubin",
-        albumName:"The Musical Alphabet",
-        trackID: "1",
-        albumCoverURL: "https://www.google.com/url?sa=i&url=https%3A%2F%2Farts.duke.edu%2Fnews%2Fmaking-music-matter%2F&psig=AOvVaw3iMhI5zMR4OirXZqEevwgm&ust=1594821774644000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMiNv570zOoCFQAAAAAdAAAAABAD", 
-        timeAdded: "",
-        votes: 1, 
-        year: "2020",
-        length: "2"
-    },
-    {
-        title: "the sheep goes BAA",
-        artist: "Jacob Rubin",
-        albumName:"The Musical Alphabet",
-        trackID: "1",
-        albumCoverURL: "https://www.google.com/url?sa=i&url=https%3A%2F%2Farts.duke.edu%2Fnews%2Fmaking-music-matter%2F&psig=AOvVaw3iMhI5zMR4OirXZqEevwgm&ust=1594821774644000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMiNv570zOoCFQAAAAAdAAAAABAD", 
-        timeAdded: "",
-        votes: 1, 
-        year: "2020",
-        length: "2"
-    },
-    {
-        title: "the sheep goes BAA",
-        artist: "Jacob Rubin",
-        albumName:"The Musical Alphabet",
-        trackID: "1",
-        albumCoverURL: "https://www.google.com/url?sa=i&url=https%3A%2F%2Farts.duke.edu%2Fnews%2Fmaking-music-matter%2F&psig=AOvVaw3iMhI5zMR4OirXZqEevwgm&ust=1594821774644000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMiNv570zOoCFQAAAAAdAAAAABAD", 
-        timeAdded: "",
-        votes: 1, 
-        year: "2020",
-        length: "2"
-    },
-    {
-        title: "the sheep goes BAA",
-        artist: "Jacob Rubin",
-        albumName:"The Musical Alphabet",
-        trackID: "1",
-        albumCoverURL: "https://www.google.com/url?sa=i&url=https%3A%2F%2Farts.duke.edu%2Fnews%2Fmaking-music-matter%2F&psig=AOvVaw3iMhI5zMR4OirXZqEevwgm&ust=1594821774644000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMiNv570zOoCFQAAAAAdAAAAABAD", 
-        timeAdded: "",
-        votes: 1, 
-        year: "2020",
-        length: "2"
-    }, 
-    {
-        title: "the sheep goes BAA",
-        artist: "Jacob Rubin",
-        albumName:"The Musical Alphabet",
-        trackID: "1",
-        albumCoverURL: "https://www.google.com/url?sa=i&url=https%3A%2F%2Farts.duke.edu%2Fnews%2Fmaking-music-matter%2F&psig=AOvVaw3iMhI5zMR4OirXZqEevwgm&ust=1594821774644000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMiNv570zOoCFQAAAAAdAAAAABAD", 
-        timeAdded: "",
-        votes: 1, 
-        year: "2020",
-        length: "2"
-    },
-    {
-        title: "the sheep goes BAA",
-        artist: "Jacob Rubin",
-        albumName:"The Musical Alphabet",
-        trackID: "1",
-        albumCoverURL: "https://www.google.com/url?sa=i&url=https%3A%2F%2Farts.duke.edu%2Fnews%2Fmaking-music-matter%2F&psig=AOvVaw3iMhI5zMR4OirXZqEevwgm&ust=1594821774644000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMiNv570zOoCFQAAAAAdAAAAABAD", 
-        timeAdded: "",
-        votes: 1, 
-        year: "2020",
-        length: "2"
-    },
-    {
-        title: "the sheep goes BAA",
-        artist: "Jacob Rubin",
-        albumName:"The Musical Alphabet",
-        trackID: "1",
-        albumCoverURL: "https://www.google.com/url?sa=i&url=https%3A%2F%2Farts.duke.edu%2Fnews%2Fmaking-music-matter%2F&psig=AOvVaw3iMhI5zMR4OirXZqEevwgm&ust=1594821774644000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMiNv570zOoCFQAAAAAdAAAAABAD", 
-        timeAdded: "",
-        votes: 1, 
-        year: "2020",
-        length: "2"
-    },       
-     
+        name: "the sheep goes BAA",
+        artists: [{name:"Jacob Rubin", id: "", uri:"", type: "artist"}],
+        album: {name:"The Musical Alphabet", id: "", images:[{width: 300,height: 300, url: "https://humbernews.ca/wp-content/uploads/2020/01/Mac-Miller.jpg"}]},    
+        id: "1",
+     }, 
 ]
 
 @Component({
@@ -117,7 +41,7 @@ const SONG_DATA: Song[] = [
     selector: 'radio'
 })
 
-export class RadioComponent{
+export class RadioComponent implements OnInit{
     /* NOTES:
         - dataSource goes to the queue, it needs to SUBSCRIBE to the queue we have on the backend-->
         constant get endpoint that is updated constanly
@@ -125,20 +49,24 @@ export class RadioComponent{
         - create POST endpoint: when you click the "plus" button    
         - need to pay
     */ 
-    displayedColumns: string[]= [ "albumCoverURL", "Title", "Artist", "Album", "votes"];
-    dataSource = SONG_DATA;
+    displayedColumns: string[]= [ "albumCoverURL", "Title", "Artist", "Album"];
+    dataSource= SONG_DATA;
     isHidden = true; 
-    searchedSongs: Song[];
- 
+    searchedSongs: Track[];
+    dataSourceSearch: MatTableDataSource<Track> = new MatTableDataSource<Track>([]);
     song = new FormControl('');    
 
     //add spotify service
-    constructor(private router:Router, public dialog: MatDialog, private renderer: Renderer2) {}
+    constructor(private router:Router, public dialog: MatDialog, public service:SpotifyService, private renderer: Renderer2){
+        console.log(SONG_DATA[0].album.name);
+    }
     
     displayedColumnsSearch: string[]= ["actions", "Title", "Artist"];
-    dataSourceSearch = SONG_DATA;
-
+        
     ngOnInit() {
+      //set data for search table 
+       this.service.searchSong('hey', "track", 20 , TOKEN).subscribe(tracks => {
+            this.dataSourceSearch.data = tracks;
         //install spotify webplayer SDK
         const s = this.renderer.createElement('script');
         s.onload = this.loadSDKScript.bind(this);
@@ -188,9 +116,15 @@ export class RadioComponent{
         console.log(this.song.value);
         this.isHidden = !this.isHidden; 
         console.log("isHidden: ", this.isHidden);
-        //this is to get the searched data 
-       // this.searchedSongs = this.service.searchSong(this.song.value, "song", "token");
+        this.service.searchSong(this.song.value, "track", 20 , TOKEN).subscribe(tracks => {
+            this.dataSourceSearch.data = tracks.tracks.items;
+            console.log("Data: ", this.dataSourceSearch.data);
 
+            console.log("SongL", this.dataSourceSearch.data);
+        });
+
+        //this is to get the searched data 
+        //this.dataSourceSearch.filteredData = this.service.searchSong(this.song.value, "track", 20, TOKEN);
     }
     openPopup(trackID:string, title:string, artist:string): void{
 
@@ -201,7 +135,7 @@ export class RadioComponent{
                 trackID: trackID,
                 title: title,
                 artist: artist
-            }
+            } 
         });
  
 

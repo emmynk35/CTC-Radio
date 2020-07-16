@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Track } from './track';
 import { map } from 'rxjs/operators';
 
 interface Token {
@@ -25,18 +26,26 @@ export class SpotifyService {
   }
  
   // Get search results for song
+  searchSongTest(keyword: string, type = 'track', limit: number, authToken: string) {
+      let headers = new HttpHeaders({
+        'Authorization': 'Bearer '+ authToken,
+      });
+      this.searchUrl = 'https://api.spotify.com/v1/search?q='+keyword+'&type='+type+'&market=US&limit='+limit;
+      console.log(this.searchUrl);
+      return this._http.get<Track[]>(this.searchUrl, {headers:headers});
+
   searchSong(keyword: string, type = 'track', limit: number) {
     let headers = new HttpHeaders({
-      'Authorization': 'Bearer'+this.getAuthToken(),
+      'Authorization': 'Bearer '+this.getAuthToken(),
     });
     this.url = 'https://api.spotify.com/v1/search?Q='+keyword+'&type='+type+'&market=US&limit='+limit;
-    return this._http.get(this.url, {headers:headers});
+    return this._http.get<Track[]>(this.url, {headers:headers});
   }
 
   // Get data about artist
   getArtist(artist_id: string) {
     let headers = new HttpHeaders({
-        'Authorization': 'Bearer'+this.getAuthToken(),
+        'Authorization': 'Bearer '+this.getAuthToken(),
     });
 
     this.url = 'https://api.spotify.com/v1/artists/' + artist_id;
@@ -46,7 +55,7 @@ export class SpotifyService {
   // Get Tracks in ablum selected
   getAlbum(album_id: string) {
     let headers = new HttpHeaders({
-        'Authorization': 'Bearer'+this.getAuthToken(),
+        'Authorization': 'Bearer '+this.getAuthToken(),
     });
 
     this.url = 'https://api.spotify.com/v1/albums/' + album_id + '/tracks';
@@ -57,7 +66,7 @@ export class SpotifyService {
   // get info of a track
   getTrack(track_id: string) {
     let headers = new HttpHeaders({
-      'Authorization': 'Bearer'+this.getAuthToken(),
+      'Authorization': 'Bearer '+this.getAuthToken(),
     });
     this.url = 'https://api.spotify.com/v1/tracks/' + track_id;
     return this._http.get(this.url, {headers: headers});
@@ -66,7 +75,7 @@ export class SpotifyService {
   //get info from all tracks in a playlist
   getPlaylist(playlist_id: string) {
     let headers = new HttpHeaders({
-      'Authorization': 'Bearer'+this.getAuthToken(),
+      'Authorization': 'Bearer '+this.getAuthToken(),
     });
     this.url = 'https://api.spotify.com/v1/playlists/' + playlist_id + '/tracks';
     return this._http.get(this.url, {headers: headers}); 
@@ -90,7 +99,7 @@ export class SpotifyService {
   // can add one or more tracks to specified playlist.
   addTracksToPlaylist(playlist_id: string, uris: string[]) {
     let headers = new HttpHeaders({
-      'Authorization': 'Bearer'+this.getAuthToken(),
+      'Authorization': 'Bearer '+this.getAuthToken(),
       'Content-Type': 'application/json'
     });
     let body = {
@@ -103,7 +112,7 @@ export class SpotifyService {
   //add track to queue on your spotify
   addTracktoQueue(uri:string){
     let headers = new HttpHeaders({
-      'Authorization': 'Bearer'+this.getAuthToken(),
+      'Authorization': 'Bearer '+this.getAuthToken(),
     });
     this.url = 'https://api.spotify.com/v1/me/player/queue?uri='+uri;
     return this._http.post(this.url, {headers: headers});
@@ -117,7 +126,7 @@ export class SpotifyService {
   //change volume of currently playing song. volume goes from 0 - 100. mute is 0.
   changeVolume(volume: string) {
     let headers = new HttpHeaders({
-      'Authorization': 'Bearer'+this.getAuthToken(),
+      'Authorization': 'Bearer '+this.getAuthToken(),
     });
     this.url = 'https://api.spotify.com/v1/me/player/volume?volume_percent='+volume;
     return this._http.put(this.url, {headers: headers});
