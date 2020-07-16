@@ -119,40 +119,40 @@
 <div class="queue mat-elevation-z0">
   <table mat-table [dataSource] = "dataSource" > 
     <ng-container matColumnDef="Title">
-         <th mat-header-cell *matHeaderCellDef> Title </th>
-         <td mat-cell *matCellDef="let song"> {{song.name}} </td>
-       </ng-container>
-     
-       <ng-container matColumnDef="Artist">
-         <th mat-header-cell *matHeaderCellDef> Artist </th>
-         <td mat-cell *matCellDef="let song"> {{song.artists[0].name}} </td>
-       </ng-container>
-     
-       <ng-container matColumnDef="Album">
-         <th mat-header-cell *matHeaderCellDef> Album </th>
-         <td mat-cell *matCellDef="let song"> {{song.album.name}} </td>
-       </ng-container>
-     
-       <ng-container matColumnDef="TrackID">
-         <th mat-header-cell *matHeaderCellDef> trackID </th>
-         <td mat-cell *matCellDef="let song"> {{song.ID}} </td>
-       </ng-container>
-       
-       <ng-container matColumnDef="albumCoverURL">
-         <th mat-header-cell *matHeaderCellDef></th>
-         <td mat-cell *matCellDef="let song"> <img [src]= song.album.images[0].url style="width:30px;height:30px;">  </td>
-       </ng-container>
-       
-       <ng-container matColumnDef="Artists">
-        <th mat-header-cell *matHeaderCellDef> Artists </th>
-        <td mat-cell *matCellDef="let song"> {{song.artists}} </td>
-      </ng-container>
+                <th mat-header-cell *matHeaderCellDef>Title</th>
+                <td mat-cell *matCellDef="let song"> {{song.title}} </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="Artist">
+                <th mat-header-cell *matHeaderCellDef>Artist</th>
+                <td mat-cell *matCellDef="let song"> {{song.artist}} </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="Album">
+                <th mat-header-cell *matHeaderCellDef>Album</th>
+                <td mat-cell *matCellDef="let song"> {{song.albumName}} </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="TrackID">
+                <th mat-header-cell *matHeaderCellDef>trackID</th>
+                <td mat-cell *matCellDef="let song"> {{song.trackID}} </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="albumCoverURL">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let song" class="cover"><img [src]=song.albumCoverURL/></td>
+            </ng-container>
+            
+            <ng-container matColumnDef="timeAdded">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let song"> {{song.timeAdded}} </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="votes">
+                <th mat-header-cell *matHeaderCellDef>Votes</th>
+                <td mat-cell *matCellDef="let song"> {{song.votes}} </td>
+            </ng-container>
 
-      <ng-container matColumnDef="AlbumObj">
-        <th mat-header-cell *matHeaderCellDef> AlbumObj </th>
-        <td mat-cell *matCellDef="let song"> {{song.album}} </td>
-      </ng-container>
-  
        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;"></tr>
        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>

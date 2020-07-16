@@ -5,34 +5,35 @@ import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RadioAddSongComponent } from './radio-addSong.component';
 import { MatDialog } from '@angular/material/dialog';
-import { MatDialogActions }  from '@angular/material/dialog';
 import { Track } from 'src/app/track';
-import { TrackTest} from 'src/app/trackTest';
 import { MatTableDataSource } from '@angular/material/table';
 import { SpotifyService } from 'src/app/spotify.services';
-import { TrackDummy } from 'src/app/trackDummy';
 import { inject } from '@angular/core/testing';
 //import { SpotifyService } from 'src/app/spotify.services';
-const TOKEN: string ="BQAwe8h0J3_840xZ8WgToc78GurxPL4xCVm3hteGZmZMlE5_DZF-nqaBlVzqhrwPI4uUfqVqHpOiZ8GNOcH_qtVdYgQinEOc-cuV3gQClDazCca-F5TX3nHNEB__YgEL10iTHy89SA64KnXgIQ";
-const SONG_DATA: TrackDummy[] = [
+const TOKEN: string ="BQChlvr0YendseeJ6Kxaf2Lr7bC4cQFImof4MYd35ZBswjZbCKuDUvkLqzHSQEUnI22158QDa7bbrxz9X8z4ndcQTI-4PqNJmhM9F0tNKxqSiNkXSGnGL6yiLzpf_0_mehgSsNxmoFSnmLIO4A";
+const SONG_DATA: Song[] = [
     {
-    name: "the sheep goes BAA",
-    artists: [{name:"Jacob Rubin", id: "", uri:"", type: "artist"}],
-    album: {name:"The Musical Alphabet", id: "", images:[{width: 300,height: 300, url: "https://humbernews.ca/wp-content/uploads/2020/01/Mac-Miller.jpg"}]},
-    id: "1",
+    title: "the sheep goes BAA",
+    artist:"Jacob Rubin",
+    albumName: "The Musical Alphabet",
+    timeAdded: "",
+    albumCoverURL: "https://humbernews.ca/wp-content/uploads/2020/01/Mac-Miller.jpg",
+    trackID: "1",
+    votes: 1,
+    year:"2020",
+    length: ""
     },
     {
-        name: "the sheep goes BAA",
-        artists: [{name:"Jacob Rubin", id: "", uri:"", type: "artist"}],
-        album: {name:"The Musical Alphabet", id: "", images:[{width: 300,height: 300, url: "https://humbernews.ca/wp-content/uploads/2020/01/Mac-Miller.jpg"}]},
-        id: "1",
-        },
-    {
-        name: "the sheep goes BAA",
-        artists: [{name:"Jacob Rubin", id: "", uri:"", type: "artist"}],
-        album: {name:"The Musical Alphabet", id: "", images:[{width: 300,height: 300, url: "https://humbernews.ca/wp-content/uploads/2020/01/Mac-Miller.jpg"}]},    
-        id: "1",
-     }, 
+        title: "the sheep goes BAA",
+    artist:"Jacob Rubin",
+    albumName: "The Musical Alphabet",
+    timeAdded: "",
+    albumCoverURL: "https://humbernews.ca/wp-content/uploads/2020/01/Mac-Miller.jpg",
+    trackID: "1",
+    votes: 1,
+    year:"2020",
+    length: ""
+    },
 ]
 
 @Component({
@@ -58,15 +59,15 @@ export class RadioComponent implements OnInit{
 
     //add spotify service
     constructor(private router:Router, public dialog: MatDialog, public service:SpotifyService, private renderer: Renderer2){
-        console.log(SONG_DATA[0].album.name);
     }
     
     displayedColumnsSearch: string[]= ["actions", "Title", "Artist"];
         
     ngOnInit() {
       //set data for search table 
-       this.service.searchSong('hey', "track", 20 , TOKEN).subscribe(tracks => {
+       this.service.searchSongTest('hey', "track", 20 , TOKEN).subscribe(tracks => {
             this.dataSourceSearch.data = tracks;
+       });
         //install spotify webplayer SDK
         const s = this.renderer.createElement('script');
         s.onload = this.loadSDKScript.bind(this);
@@ -116,7 +117,7 @@ export class RadioComponent implements OnInit{
         console.log(this.song.value);
         this.isHidden = !this.isHidden; 
         console.log("isHidden: ", this.isHidden);
-        this.service.searchSong(this.song.value, "track", 20 , TOKEN).subscribe(tracks => {
+        this.service.searchSongTest(this.song.value, "track", 20 , TOKEN).subscribe(tracks => {
             this.dataSourceSearch.data = tracks.tracks.items;
             console.log("Data: ", this.dataSourceSearch.data);
 
