@@ -38,7 +38,8 @@ export class MusicPlayerComponent {
         this.curSeconds = this.curSeconds + 1;
         var d = new Date(0,0,0,0,0,0,0);
         d.setSeconds(this.curSeconds);
-        var s = d.toString(); 
+        var s = d.toTimeString();
+        var songCurrLength = s.substring(3,8); 
         this.songCurrLength = s;
     }
 
