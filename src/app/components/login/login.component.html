@@ -21,14 +21,11 @@
     </mat-form-field>
     <mat-form-field class="example-full-width">
         <mat-label>Password</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'" matInput [formControl]="password">
-        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-        </button>
+          <input matInput [formControl]="passwordFormControl">
     </mat-form-field>
     <mat-dialog-actions>
         <div class="button-holder">
-            <button mat-flat-button color="primary"  (click)="onSubmitLogin()" >Login</button>
+            <button mat-flat-button color="primary"  (click)="onSubmitLogin()" mat-dialog-close>Login</button>
             <button mat-button color="primary" (click)="onSubmitSignUp()"  mat-dialog-close>Create New Account</button> 
         </div>
     </mat-dialog-actions>

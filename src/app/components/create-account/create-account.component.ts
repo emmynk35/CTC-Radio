@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog'
 import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
+import { AccountService } from '../../account.service';
 
 
 /** Error when invalid control is dirty, touched, or submitted. */
@@ -23,8 +24,10 @@ import {ErrorStateMatcher} from '@angular/material/core';
 
   hide = true;
   firstName = new FormControl('');
-  lastName = new FormControl('');  
-  password = new FormControl('');
+  lastName = new FormControl(''); 
+  email : string;
+  password : string; 
+  passwordFormControl = new FormControl('');
   emailFormControl = new FormControl('', [
       Validators.required,
       Validators.email,
@@ -32,11 +35,15 @@ import {ErrorStateMatcher} from '@angular/material/core';
 
     matcher = new MyErrorStateMatcher();
   
+    constructor(private accountService : AccountService){}
 
   public onCreateNewAccount(){
       this.hide = false;
-      alert("New Account \n Name: "+this.firstName.value+" "+this.lastName.value+" \n email: "+this.emailFormControl.value+ "    password: "+this.password.value);
-  }
+      this.email = this.emailFormControl.value;
+      this.password = this.passwordFormControl.value;
+      alert("New Account \n Name: "+this.firstName.value+" "+this.lastName.value+" \n email: "+this.email+ "    password: "+this.password);
+      this.accountService.addAccount(this.email , this.password);
+    }
 
   
 

@@ -52,8 +52,10 @@ module.exports = (app, db) => {
 
             console.log("got the body:", req.body);
 
-            var username = req.body.username;
+            var email = req.body.email;
             var password = req.body.password;
+
+            var username = email.split("@")[0];
 
             const cityRef = db.collection('users').doc(username);
             const doc = await cityRef.get();
