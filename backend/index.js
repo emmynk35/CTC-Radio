@@ -2,9 +2,11 @@ const express = require('express');
 const bodyparser = require('body-parser');
 var session = require('express-session');
 const app = express();
+var cors = require('cors');
 
 app.use(bodyparser.json());
 app.use(session({secret: "Shh, its a secret!"}));
+app.use(cors());
 
 const admin = require('firebase-admin');
 const serviceAccount = require('./config/ctc-radio-eb90386e8175.json');

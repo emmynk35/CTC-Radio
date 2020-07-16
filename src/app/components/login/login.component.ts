@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog'
 import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 import { CreateAccountComponent } from '../create-account/create-account.component';
+import { AccountService } from '../../account.service';
 
 
 /** Error when invalid control is dirty, touched, or submitted. */
@@ -22,23 +23,31 @@ import { CreateAccountComponent } from '../create-account/create-account.compone
  
  export class LoginComponent {
 
+   login = false;
     hide = true;
-    
-    password = new FormControl('');
+    email: string;
+    password: string; 
+    passwordFormControl = new FormControl('');
     emailFormControl = new FormControl('', [
         Validators.required,
         Validators.email,
       ]);
 
       matcher = new MyErrorStateMatcher();
-    constructor(public dialog: MatDialog,
+    
+     
+      constructor(private accountService : AccountService, public dialog: MatDialog,
         public dialogRef: MatDialogRef<LoginComponent>,
        @Inject(MAT_DIALOG_DATA) public data:any){
         }
 
+
     public onSubmitLogin(){
         this.hide = false;
-        alert("email: "+this.emailFormControl.value+ "    password: "+this.password.value);
+        this.email = this.emailFormControl.value;
+        this.password = this.passwordFormControl.value;
+        this.accountService.loginToExistingAccount(this.email , this.password);
+        this.login = true;
     }
 
     onSubmitSignUp():void {
