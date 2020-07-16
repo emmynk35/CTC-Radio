@@ -29,6 +29,7 @@ table{
     width: 100%;
     overflow: auto;
 }
+
 .music-player{
     margin-bottom: 3%;
     margin-top: 3%;
@@ -42,4 +43,12 @@ table{
     left: 0;
     right: 0;
     bottom: 0;
+}
+
+th.mat-column-albumCoverURL {
+    width: 10% !important;
+}
+
+img {
+    width: 60%;
 }

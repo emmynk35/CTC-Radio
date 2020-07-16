@@ -21,10 +21,15 @@ mat-card {
 .buttons {
   display: flex;
   flex-direction: column;
+  width: 8%;
 }
 
 .mute {
-  margin-bottom: 20px;
+  margin-bottom: 20px; 
+}
+
+.but {
+  color: #eeeeee !important;
 }
 
 h2 {
@@ -42,5 +47,5 @@ h1 {
 }
 
 img {
-  width: 20%;
+  min-width: 200px;
 }
