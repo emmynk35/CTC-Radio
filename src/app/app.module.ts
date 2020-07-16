@@ -20,6 +20,7 @@ import { MatInputModule} from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
 import { MatProgressBarModule, MatProgressBar } from '@angular/material/progress-bar';
 import { RadioAddSongComponent } from './components/radio/radio-addSong.component';
+import { SpotifyService } from './spotify.services';
 
 @NgModule({
   declarations: [
@@ -30,16 +31,16 @@ import { RadioAddSongComponent } from './components/radio/radio-addSong.componen
     MusicPlayerComponent,
     RadioAddSongComponent,
   ],
-  imports: [
-    BrowserModule,
+  imports: [    
     AppRoutingModule,
-    MatGridListModule,
+    BrowserModule,
     BrowserAnimationsModule,
-    MatToolbarModule,
     MatButtonModule,
+    MatDialogModule,
+    MatGridListModule,
     MatIconModule,
     MatTableModule,
-    MatDialogModule,
+    MatToolbarModule,
     FormsModule,
     MatFormFieldModule,
     ReactiveFormsModule,
@@ -48,7 +49,7 @@ import { RadioAddSongComponent } from './components/radio/radio-addSong.componen
     MatCardModule,
     MatProgressBarModule,
   ],
-  providers: [],
+  providers: [SpotifyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
