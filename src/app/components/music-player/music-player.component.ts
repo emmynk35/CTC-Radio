@@ -23,6 +23,7 @@ export class MusicPlayerComponent {
     song = SONG_DATA;
     barValue = '50';
     songCurrLength = '0:00';
+    username = "Username";
    
     getImageSrc() {
         return this.song.albumCoverURL;

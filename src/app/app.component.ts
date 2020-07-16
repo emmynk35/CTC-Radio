@@ -9,20 +9,22 @@ import { MatDialog } from '@angular/material/dialog';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   title = 'ctc-radio';
- 
-  
-  ngOnInit() {
-    
-  }
-  constructor(public dialog: MatDialog) {}
+
+  constructor(public dialog: MatDialog, private s: SpotifyService) {}
+
   openLogin(): void {
     this.dialog.open(LoginComponent, {
         width: '600px',
         panelClass: 'my-dialog',
     });
   }
+  
+  ngOnInit() {
+    this.s.getAuthToken();
+  }
+  
 }
 
 

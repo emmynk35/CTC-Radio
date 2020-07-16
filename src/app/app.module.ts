@@ -21,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatProgressBarModule, MatProgressBar } from '@angular/material/progress-bar';
 import { RadioAddSongComponent } from './components/radio/radio-addSong.component';
 import { LoginComponent } from './components/login/login.component';
+import { SpotifyService } from './spotify.services';
 
 
 @NgModule({
@@ -52,7 +53,9 @@ import { LoginComponent } from './components/login/login.component';
     MatProgressBarModule,
 
   ],
-  providers: [],
+  providers: [
+    SpotifyService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
