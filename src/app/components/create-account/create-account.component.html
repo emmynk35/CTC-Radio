@@ -1,5 +1,13 @@
-<h2>Create New Account</h2>
- <form class="example-form">
+
+
+<mat-toolbar color="accent">
+  <span>Create New Account</span>
+  <span class="example-spacer"></span>
+  <button mat-icon-button mat-dialog-close >
+    <mat-icon>cancel</mat-icon>
+  </button>
+</mat-toolbar>
+<form class="example-form">
   <mat-form-field class="example-full-width">
     <mat-label>First Name</mat-label>
     <input matInput [formControl]="firstName">
@@ -19,8 +27,6 @@
         Email is <strong>required</strong>
       </mat-error>
     </mat-form-field>
-    <br>
-    <br>
     <mat-form-field class="example-full-width">
         <mat-label>Password</mat-label>
         <input matInput [type]="hide ? 'password' : 'text'" matInput [formControl]="password">
@@ -31,8 +37,6 @@
     <mat-dialog-actions>
         <div class="button-holder">
             <button mat-flat-button color="primary" (click)="onCreateNewAccount()" >Create New Account</button>
-            
-            <button mat-flat-button mat-dialog-close color="primary" mat-dialog-close>Close</button>
         </div>
     </mat-dialog-actions>
   </form> 
