@@ -1,45 +1,37 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 interface Token {
-  token: string
+  accessToken: string
 }
 
 @Injectable()
 export class SpotifyService {
   private url: string;
   private token: Token;
+  private auth: string;
+  private tokenStr: string;
   private clientId: string = 'ad959a319ba14a81a4f1950d46f49aee';
   private clientSecret: string = '201ad462d8c64353bd52c5ad8ecb2bfe';
   private body: any;
 
   constructor(private _http: HttpClient) {}
 
-  //get authorization token
   getAuthToken() {
-    this._http.get<Token>('http://localhost:3000/auth/token').subscribe(data => {
-      this.token = { token: (data as any).refreshToken.fieldProto.token.stringValue} 
+    this._http.get<Token[]>('http://localhost:3000/auth/token').subscribe(data => {
+      this.token = { accessToken: data['accessToken']};
+      console.log(this.token.accessToken);
     });
-    
-    console.log(this.token);
-    // this._http.get('http://localhost:3000/auth/token').toPromise().then(data => {
-    //   for (let key in data) {
-    //     if(data.hasOwnProperty(key)) {
-    //       this.tokens.push(data[key]);
-    //     }
-    //   }
-    // });
-    // console.log(this.tokens[0]);
-    // return this.tokens[0];
   }
-
+ 
   // Get search results for song
   searchSong(keyword: string, type = 'track', limit: number) {
-      let headers = new HttpHeaders({
-        'Authorization': 'Bearer'+this.getAuthToken(),
-      });
-      this.url = 'https://api.spotify.com/v1/search?Q='+keyword+'&type='+type+'&market=US&limit='+limit;
-      return this._http.get(this.url, {headers:headers});
+    let headers = new HttpHeaders({
+      'Authorization': 'Bearer'+this.auth,
+    });
+    this.url = 'https://api.spotify.com/v1/search?Q='+keyword+'&type='+type+'&market=US&limit='+limit;
+    return this._http.get(this.url, {headers:headers});
   }
 
   // Get data about artist
