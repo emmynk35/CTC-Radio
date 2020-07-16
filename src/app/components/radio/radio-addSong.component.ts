@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SpotifyService } from 'src/app/spotify.services';
+import { RadioComponent } from './radio.component';
 
 @Component({
    templateUrl: './radio-addSong.component.html',
@@ -21,7 +22,6 @@ export class RadioAddSongComponent implements OnInit{
         this.service.addTracktoQueue(this.data.uri);
         console.log(this.data.uri);
         alert("Added to Queue!")
-        //TODO: CREATE POST ENDPOINT TO ADD DATA.TRACK_ID TO QUEUE!
      }
   
 }
