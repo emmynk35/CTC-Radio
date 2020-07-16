@@ -1,8 +1,5 @@
 import { Album } from './album';
 import { Artist } from './Artist';
-import { ExternalURL } from 'src/app/externalURL';
-import { ExternalID } from './externalID';
-import { LinkedTrack } from './linkedTrack';
 
 export interface Track{
     album: Album;

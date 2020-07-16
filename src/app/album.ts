@@ -1,6 +1,5 @@
 import { Image } from './image';
 import { Artist } from './Artist';
-import { ExternalURL } from './externalURL';
 
 export interface Album{
     //album_group:string;
