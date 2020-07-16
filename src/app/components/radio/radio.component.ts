@@ -9,7 +9,7 @@ import { Track } from 'src/app/track';
 import { MatTableDataSource } from '@angular/material/table';
 import { SpotifyService } from 'src/app/spotify.services';
 import { inject } from '@angular/core/testing';
-//import { SpotifyService } from 'src/app/spotify.services';
+
 const TOKEN: string ="BQChlvr0YendseeJ6Kxaf2Lr7bC4cQFImof4MYd35ZBswjZbCKuDUvkLqzHSQEUnI22158QDa7bbrxz9X8z4ndcQTI-4PqNJmhM9F0tNKxqSiNkXSGnGL6yiLzpf_0_mehgSsNxmoFSnmLIO4A";
 const SONG_DATA: Song[] = [
     {
@@ -52,7 +52,8 @@ export class RadioComponent implements OnInit{
     */ 
     displayedColumns: string[]= [ "albumCoverURL", "Title", "Artist", "Album"];
     dataSource= SONG_DATA;
-    isHidden = true; 
+    isHidden = true;
+    vol = 'Mute';
     searchedSongs: Track[];
     dataSourceSearch: MatTableDataSource<Track> = new MatTableDataSource<Track>([]);
     song = new FormControl('');    
@@ -75,13 +76,15 @@ export class RadioComponent implements OnInit{
         s.src = 'https://sdk.scdn.co/spotify-player.js';
         s.text = '';
         this.renderer.appendChild(document.body, s);
+        
+
     }
 
     loadSDKScript() {
         const s = this.renderer.createElement('script');
         s.text = `
             window.onSpotifyWebPlaybackSDKReady = () => {
-                const token = '[My Spotify Web API access token]';
+                const token = 'BQC4jZP2HiHuRSrIa5aBOUqjh7e_Fb7-jjERPOWIeKDlHJstTKTYkdwLgXXHuI_8JFH6ZXk4xS_915IrRig9MyBpjh3wPBgBfWxmBNH9_Qd26aJpobq4aXf7wCr2VpuqNao7bfR_XpwaGgPuiJeAzyUZz76llK7T9tc-TQ';
                 const player = new Spotify.Player({
                 name: 'Web Playback SDK Quick Start Player',
                 getOAuthToken: cb => { cb(token); }
@@ -127,13 +130,13 @@ export class RadioComponent implements OnInit{
         //this is to get the searched data 
         //this.dataSourceSearch.filteredData = this.service.searchSong(this.song.value, "track", 20, TOKEN);
     }
-    openPopup(trackID:string, title:string, artist:string): void{
+    openPopup(uri:string, title:string, artist:string): void{
 
         console.log("Adding song to queue:", title);
         this.dialog.open(RadioAddSongComponent, {
             width: '600px',
             data: {
-                trackID: trackID,
+                uri: uri,
                 title: title,
                 artist: artist
             } 
@@ -141,6 +144,5 @@ export class RadioComponent implements OnInit{
  
 
     }
-    
     
 }   

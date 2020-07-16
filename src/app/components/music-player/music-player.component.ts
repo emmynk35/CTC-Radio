@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Song } from '../../song';
+import { SpotifyService } from 'src/app/spotify.services';
 
 const SONG_DATA: Song = {
     title: "Nikes",
@@ -22,10 +23,34 @@ const SONG_DATA: Song = {
 export class MusicPlayerComponent {
     song = SONG_DATA;
     barValue = '50';
-    songCurrLength = '0:00';
+    songCurrLength = '1:00';
     username = "Username";
+    vol = 'Mute';
+    curSeconds = 0;
+
+    constructor(public service:SpotifyService){}
    
     getImageSrc() {
         return this.song.albumCoverURL;
     }
+
+    updateCurrLength(){
+        this.curSeconds = this.curSeconds + 1;
+        var d = new Date(0,0,0,0,0,0,0);
+        d.setSeconds(this.curSeconds);
+        var s = d.toString(); 
+        this.songCurrLength = s;
+    }
+
+    changeVol() {
+        if (this.vol=='Mute') {
+            this.service.changeVolume('0');
+            this.vol = 'Unmute';
+        }
+        else {
+            this.service.changeVolume('50');
+            this.vol = 'Mute';
+        }
+    }
+
 }

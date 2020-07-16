@@ -19,10 +19,11 @@ export class SpotifyService {
   constructor(private _http: HttpClient) {}
 
   getAuthToken() {
-    this._http.get<Token[]>('http://localhost:3000/auth/token').subscribe(data => {
-      this.token = { accessToken: data['accessToken']};
-      console.log(this.token.accessToken);
-    });
+    // this._http.get<Token[]>('http://localhost:3000/auth/token').subscribe(data => {
+    //   this.token = { accessToken: data['accessToken']};
+    //   console.log(this.token.accessToken);
+    // });
+    return "BQC4jZP2HiHuRSrIa5aBOUqjh7e_Fb7-jjERPOWIeKDlHJstTKTYkdwLgXXHuI_8JFH6ZXk4xS_915IrRig9MyBpjh3wPBgBfWxmBNH9_Qd26aJpobq4aXf7wCr2VpuqNao7bfR_XpwaGgPuiJeAzyUZz76llK7T9tc-TQ";
   }
  
   // Get search results for song
@@ -115,8 +116,10 @@ export class SpotifyService {
     let headers = new HttpHeaders({
       'Authorization': 'Bearer '+this.getAuthToken(),
     });
+    console.log("uri: ", uri); 
     this.url = 'https://api.spotify.com/v1/me/player/queue?uri='+uri;
     return this._http.post(this.url, {headers: headers});
+
   }
 
   //change queue order
