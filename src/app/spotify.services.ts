@@ -30,9 +30,10 @@ export class SpotifyService {
       let headers = new HttpHeaders({
         'Authorization': 'Bearer '+ authToken,
       });
-      this.searchUrl = 'https://api.spotify.com/v1/search?q='+keyword+'&type='+type+'&market=US&limit='+limit;
-      console.log(this.searchUrl);
-      return this._http.get<Track[]>(this.searchUrl, {headers:headers});
+      this.url = 'https://api.spotify.com/v1/search?q='+keyword+'&type='+type+'&market=US&limit='+limit;
+      console.log(this.url);
+      return this._http.get<Track[]>(this.url, {headers:headers});
+  }
 
   searchSong(keyword: string, type = 'track', limit: number) {
     let headers = new HttpHeaders({
