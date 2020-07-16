@@ -11,7 +11,6 @@ export class SpotifyService {
   private url: string;
   private token: Token;
   private auth: string;
-  private tokenStr: string;
   private clientId: string = 'ad959a319ba14a81a4f1950d46f49aee';
   private clientSecret: string = '201ad462d8c64353bd52c5ad8ecb2bfe';
   private body: any;
@@ -28,7 +27,7 @@ export class SpotifyService {
   // Get search results for song
   searchSong(keyword: string, type = 'track', limit: number) {
     let headers = new HttpHeaders({
-      'Authorization': 'Bearer'+this.auth,
+      'Authorization': 'Bearer'+this.getAuthToken(),
     });
     this.url = 'https://api.spotify.com/v1/search?Q='+keyword+'&type='+type+'&market=US&limit='+limit;
     return this._http.get(this.url, {headers:headers});
