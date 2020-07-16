@@ -11,6 +11,9 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class AppComponent implements OnInit {
   title = 'ctc-radio';
+  accountEmail: string;
+  accountPassword: string;
+  login = false;
 
   constructor(public dialog: MatDialog, private s: SpotifyService) {}
 
@@ -18,6 +21,7 @@ export class AppComponent implements OnInit {
     this.dialog.open(LoginComponent, {
         width: '600px',
         panelClass: 'my-dialog',
+        data: {email: this.accountEmail, password: this.accountPassword, login: this.login}
     });
   }
   
