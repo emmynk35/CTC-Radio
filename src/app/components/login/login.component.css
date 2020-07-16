@@ -11,3 +11,16 @@
     width: 100%;
 
   }
+  .button-holder{
+      align-items: center;
+  }
+
+  .mat-button:hover{
+      text-decoration:underline;
+  }
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+  .mat-icon {
+    font-size: 20px;
+  }
