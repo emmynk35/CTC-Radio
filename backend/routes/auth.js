@@ -137,10 +137,11 @@ module.exports = (app, db) => {
         '/auth/token',
         async (req, res) => {
             const tokenRef= db.collection('spotify').doc('tokens');
-            const refreshToken = await tokenRef.get("refresh_token");
+            const accessToken = await tokenRef.get("refresh_token");
             const token = await tokenRef.get("token");
+            const toReturn = accessToken._fieldsProto.token.stringValue;
 
-            return resp.status(200).json({ token: token, refreshToken: refreshToken});
+            return res.status(200).json({ accessToken: toReturn });
         }
     )
 

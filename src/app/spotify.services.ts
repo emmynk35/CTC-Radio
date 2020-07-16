@@ -1,52 +1,51 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+interface Token {
+  token: string
+}
 
 @Injectable()
 export class SpotifyService {
   private url: string;
+  private token: Token;
   private clientId: string = 'ad959a319ba14a81a4f1950d46f49aee';
   private clientSecret: string = '201ad462d8c64353bd52c5ad8ecb2bfe';
   private body: any;
 
+  constructor(private _http: HttpClient) {}
 
-  constructor(private _http: HttpClient) { }
-
-  // Get access token from Spotify to use API
-  refreshAuth = () => {
-    let headers = new HttpHeaders({
-        'Authorization': 'Basic ' + btoa(this.clientId + ":" + this.clientSecret),
-        'Content-Type': 'application/x-www-form-urlencoded' 
+  //get authorization token
+  getAuthToken() {
+    this._http.get<Token>('http://localhost:3000/auth/token').subscribe(data => {
+      this.token = { token: (data as any).refreshToken.fieldProto.token.stringValue} 
     });
-
-    //let params: URLSearchParams = new URLSearchParams();
-    //params.set('grant_type', 'client_credentials');
-    //let body = params.toString();
-
-    // let body = 
-    // {
-    //     grant_type: 'refresh_token'
-    //     refresh_token: //database query to get the current refresh token
-        
-    // }
-
-    //return this._http.post('https://accounts.spotify.com/api/token', body, {headers: headers});
-
+    
+    console.log(this.token);
+    // this._http.get('http://localhost:3000/auth/token').toPromise().then(data => {
+    //   for (let key in data) {
+    //     if(data.hasOwnProperty(key)) {
+    //       this.tokens.push(data[key]);
+    //     }
+    //   }
+    // });
+    // console.log(this.tokens[0]);
+    // return this.tokens[0];
   }
 
   // Get search results for song
-  searchSong(keyword: string, type = 'track', limit: number, authToken: string) {
+  searchSong(keyword: string, type = 'track', limit: number) {
       let headers = new HttpHeaders({
-        'Authorization': 'Bearer'+authToken,
+        'Authorization': 'Bearer'+this.getAuthToken(),
       });
       this.url = 'https://api.spotify.com/v1/search?Q='+keyword+'&type='+type+'&market=US&limit='+limit;
       return this._http.get(this.url, {headers:headers});
   }
 
   // Get data about artist
-  getArtist(artist_id: string, authToken: string) {
+  getArtist(artist_id: string) {
     let headers = new HttpHeaders({
-        'Authorization': 'Bearer'+authToken,
+        'Authorization': 'Bearer'+this.getAuthToken(),
     });
 
     this.url = 'https://api.spotify.com/v1/artists/' + artist_id;
@@ -54,9 +53,9 @@ export class SpotifyService {
   }
 
   // Get Tracks in ablum selected
-  getAlbum(album_id: string, authToken: string) {
+  getAlbum(album_id: string) {
     let headers = new HttpHeaders({
-        'Authorization': 'Bearer'+authToken,
+        'Authorization': 'Bearer'+this.getAuthToken(),
     });
 
     this.url = 'https://api.spotify.com/v1/albums/' + album_id + '/tracks';
@@ -65,27 +64,27 @@ export class SpotifyService {
   }
 
   // get info of a track
-  getTrack(track_id: string, authToken: string) {
+  getTrack(track_id: string) {
     let headers = new HttpHeaders({
-      'Authorization': 'Bearer'+authToken,
+      'Authorization': 'Bearer'+this.getAuthToken(),
     });
     this.url = 'https://api.spotify.com/v1/tracks/' + track_id;
     return this._http.get(this.url, {headers: headers});
   }
 
   //get info from all tracks in a playlist
-  getPlaylist(playlist_id: string, authToken: string) {
+  getPlaylist(playlist_id: string) {
     let headers = new HttpHeaders({
-      'Authorization': 'Bearer'+authToken,
+      'Authorization': 'Bearer'+this.getAuthToken(),
     });
     this.url = 'https://api.spotify.com/v1/playlists/' + playlist_id + '/tracks';
     return this._http.get(this.url, {headers: headers}); 
   }
 
   // create playlist on emily's account (for now)
-  createPlaylist(user_id: string, playlist_name:string, authToken: string) {
+  createPlaylist(user_id: string, playlist_name:string) {
     let headers = new HttpHeaders({
-      'Authorization': 'Bearer'+authToken,
+      'Authorization': 'Bearer'+this.getAuthToken(),
       'Content-Type': 'application/json'
     });
     let body = {
@@ -98,9 +97,9 @@ export class SpotifyService {
   }
 
   // can add one or more tracks to specified playlist.
-  addTracksToPlaylist(playlist_id: string, uris: string[], authToken: string) {
+  addTracksToPlaylist(playlist_id: string, uris: string[]) {
     let headers = new HttpHeaders({
-      'Authorization': 'Bearer'+authToken,
+      'Authorization': 'Bearer'+this.getAuthToken(),
       'Content-Type': 'application/json'
     });
     let body = {
@@ -111,23 +110,23 @@ export class SpotifyService {
   }
 
   //add track to queue on your spotify
-  addTracktoQueue(uri:string, authToken: string){
+  addTracktoQueue(uri:string){
     let headers = new HttpHeaders({
-      'Authorization': 'Bearer'+authToken,
+      'Authorization': 'Bearer'+this.getAuthToken(),
     });
     this.url = 'https://api.spotify.com/v1/me/player/queue?uri='+uri;
     return this._http.post(this.url, {headers: headers});
   }
 
   //change queue order
-  updateQueue(authToken:string) {
+  updateQueue() {
     
   }
 
   //change volume of currently playing song. volume goes from 0 - 100. mute is 0.
-  changeVolume(volume: string, authToken: string) {
+  changeVolume(volume: string) {
     let headers = new HttpHeaders({
-      'Authorization': 'Bearer'+authToken,
+      'Authorization': 'Bearer'+this.getAuthToken(),
     });
     this.url = 'https://api.spotify.com/v1/me/player/volume?volume_percent='+volume;
     return this._http.put(this.url, {headers: headers});
