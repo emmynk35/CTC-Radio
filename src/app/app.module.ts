@@ -20,8 +20,10 @@ import { MatInputModule} from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
 import { MatProgressBarModule, MatProgressBar } from '@angular/material/progress-bar';
 import { RadioAddSongComponent } from './components/radio/radio-addSong.component';
+import { CreateAccountComponent } from './components/create-account/create-account.component';
 import { LoginComponent } from './components/login/login.component';
 import { SpotifyService } from './spotify.services';
+
 
 
 @NgModule({
@@ -33,6 +35,8 @@ import { SpotifyService } from './spotify.services';
     PlaylistPopupComponent,
     MusicPlayerComponent,
     RadioAddSongComponent,
+    CreateAccountComponent,
+
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,13 @@
-
-<h2>Login</h2>
-<form class="example-form">
+<h2>Create New Account</h2>
+ <form class="example-form">
+  <mat-form-field class="example-full-width">
+    <mat-label>First Name</mat-label>
+    <input matInput [formControl]="firstName">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>LastName</mat-label>
+    <input matInput [formControl]="lastName">
+  </mat-form-field>
     <mat-form-field class="example-full-width">
       <mat-label>Email</mat-label>
       <input matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
@@ -23,9 +30,9 @@
     </mat-form-field>
     <mat-dialog-actions>
         <div class="button-holder">
-            <button mat-flat-button color="primary" (click)="onSubmitLogin()" >Login</button>
-            <button mat-flat-button color="primary"  (click)="onSubmitSignUp()" mat-dialog-close>Sign Up</button>
+            <button mat-flat-button color="primary" (click)="onCreateNewAccount()" >Create New Account</button>
+            
             <button mat-flat-button mat-dialog-close color="primary" mat-dialog-close>Close</button>
         </div>
     </mat-dialog-actions>
-  </form>
+  </form> 
