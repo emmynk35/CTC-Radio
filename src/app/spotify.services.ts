@@ -10,12 +10,6 @@ interface Token {
 @Injectable()
 export class SpotifyService {
   private url: string;
-  private token: Token;
-  private auth: string;
-  private clientId: string = 'ad959a319ba14a81a4f1950d46f49aee';
-  private clientSecret: string = '201ad462d8c64353bd52c5ad8ecb2bfe';
-  private body: any;
-
   constructor(private _http: HttpClient) {}
 
   getAuthToken() {
@@ -23,13 +17,13 @@ export class SpotifyService {
     //   this.token = { accessToken: data['accessToken']};
     //   console.log(this.token.accessToken);
     // });
-    return "BQC4jZP2HiHuRSrIa5aBOUqjh7e_Fb7-jjERPOWIeKDlHJstTKTYkdwLgXXHuI_8JFH6ZXk4xS_915IrRig9MyBpjh3wPBgBfWxmBNH9_Qd26aJpobq4aXf7wCr2VpuqNao7bfR_XpwaGgPuiJeAzyUZz76llK7T9tc-TQ";
+    return 'BQCtxWcp6PApr5QNTkfolYoVLkNvfKi89_QpNyXgw1DUCENCYmOYxv9nPc0f8f4qsR40iVzn65XT5E5sLkkcIM-IxibL9WxEO68bQGznD7UULpYYTj7xaKwsrxs0NshH_POsPXoSLg-j';
   }
  
   // Get search results for song
   searchSongTest(keyword: string, type = 'track', limit: number, authToken: string) {
       let headers = new HttpHeaders({
-        'Authorization': 'Bearer '+ authToken,
+        'Authorization': 'Bearer '+ this.getAuthToken(),
       });
       this.url = 'https://api.spotify.com/v1/search?q='+keyword+'&type='+type+'&market=US&limit='+limit;
       console.log(this.url);

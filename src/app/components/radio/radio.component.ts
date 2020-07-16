@@ -84,7 +84,7 @@ export class RadioComponent implements OnInit{
         const s = this.renderer.createElement('script');
         s.text = `
             window.onSpotifyWebPlaybackSDKReady = () => {
-                const token = 'BQC4jZP2HiHuRSrIa5aBOUqjh7e_Fb7-jjERPOWIeKDlHJstTKTYkdwLgXXHuI_8JFH6ZXk4xS_915IrRig9MyBpjh3wPBgBfWxmBNH9_Qd26aJpobq4aXf7wCr2VpuqNao7bfR_XpwaGgPuiJeAzyUZz76llK7T9tc-TQ';
+                const token = 'BQCtVIGjJ5LJHpIafCtdIxYRqlStzuRgMw1-8seEZOMzGtjRbwwlNVSxN2Q9haK17IMYppTyhLWDbzjklQ1H8eK0pgTVWxgndST7i3DMYg7MQl84OEWQLKyWVnpc4B5ayQQWvv7bZ_iTtCvqSZ-0uBj-w2NAhHHo';
                 const player = new Spotify.Player({
                 name: 'Web Playback SDK Quick Start Player',
                 getOAuthToken: cb => { cb(token); }

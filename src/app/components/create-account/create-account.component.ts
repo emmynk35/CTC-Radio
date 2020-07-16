@@ -35,14 +35,16 @@ import { AccountService } from '../../account.service';
 
     matcher = new MyErrorStateMatcher();
   
-    constructor(private accountService : AccountService){}
+    constructor(private accountService : AccountService,
+      public dialogRef: MatDialogRef<CreateAccountComponent>){}
 
   public onCreateNewAccount(){
       this.hide = false;
       this.email = this.emailFormControl.value;
       this.password = this.passwordFormControl.value;
-      alert("New Account \n Name: "+this.firstName.value+" "+this.lastName.value+" \n email: "+this.email+ "    password: "+this.password);
+      //alert("New Account \n Name: "+this.firstName.value+" "+this.lastName.value+" \n email: "+this.email+ "    password: "+this.password);
       this.accountService.addAccount(this.email , this.password);
+      this.dialogRef.close();
     }
 
   

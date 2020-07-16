@@ -32,4 +32,13 @@ export class AccountService {
     return this._http.post('http://localhost:3000/auth/signin', {observe: 'response', email, password}).subscribe(response  => { console.log(response); } )
   }
 
+  logout() {
+    // return this._http.post('http://localhost:3000/auth/signout', {}).subscribe( res => {
+    //   console.log(res);
+    // });
+    return this._http.get('http://localhost:3000/').subscribe( res => {
+      console.log(res);
+    });
+  }
+
 }
