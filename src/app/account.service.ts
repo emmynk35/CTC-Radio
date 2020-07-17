@@ -29,16 +29,16 @@ export class AccountService {
 
   loginToExistingAccount(email : string, password : string)
   {
-    return this._http.post('http://localhost:3000/auth/signin', {observe: 'response', email, password}).subscribe(response  => { console.log(response); } )
+    return this._http.post('http://localhost:3000/auth/signin', {observe: 'response', email, password}, {withCredentials: true}).subscribe(response  => { console.log(response); } )
   }
 
   logout() {
-    // return this._http.post('http://localhost:3000/auth/signout', {}).subscribe( res => {
-    //   console.log(res);
-    // });
-    return this._http.get('http://localhost:3000/').subscribe( res => {
-      console.log(res);
-    });
+     return this._http.post('http://localhost:3000/auth/signout', {test: "test"}, {withCredentials: true}).subscribe( res => {
+       console.log(res);
+     });
+    //return this._http.get('http://localhost:3000/').subscribe( res => {
+    //  console.log(res);
+    //});
   }
 
 }

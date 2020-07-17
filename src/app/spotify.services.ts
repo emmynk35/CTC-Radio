@@ -23,7 +23,7 @@ export class SpotifyService {
   // Get search results for song
   searchSongTest(keyword: string, type = 'track', limit: number, authToken: string) {
       let headers = new HttpHeaders({
-        'Authorization': 'Bearer '+ this.getAuthToken(),
+        'Authorization': 'Bearer '+ 'BQDV19SV0s3X0jMScP7FeQVgAeQny0Em9g5ZN_ea2a7zPyNTJSTM0caCjNfedrsF2Gb6kxHcEb0oei-vOLDIsqQd4HYHJl_4WJSU94gqyG5kAGeyL_vFFdlIzapOin3wqs6BdSqCWh8L',
       });
       this.url = 'https://api.spotify.com/v1/search?q='+keyword+'&type='+type+'&market=US&limit='+limit;
       console.log(this.url);

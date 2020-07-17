@@ -121,7 +121,7 @@ export class RadioComponent implements OnInit{
         this.isHidden = !this.isHidden; 
         console.log("isHidden: ", this.isHidden);
         this.service.searchSongTest(this.song.value, "track", 20 , TOKEN).subscribe(tracks => {
-            this.dataSourceSearch.data = tracks.tracks.items;
+            //this.dataSourceSearch.data = tracks.tracks.items;
             console.log("Data: ", this.dataSourceSearch.data);
 
             console.log("SongL", this.dataSourceSearch.data);

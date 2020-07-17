@@ -4,9 +4,19 @@ var session = require('express-session');
 const app = express();
 var cors = require('cors');
 
+
 app.use(bodyparser.json());
-app.use(session({secret: "Shh, its a secret!"}));
-app.use(cors());
+app.use(session({
+    secret: "Shh, its a secret!",
+    resave: false,
+    saveUninitialized: true
+}));
+
+
+
+app.use(cors({origin: [
+  "http://localhost:4200"
+], credentials: true}));
 
 const admin = require('firebase-admin');
 const serviceAccount = require('./config/ctc-radio-eb90386e8175.json');
@@ -20,7 +30,7 @@ const auth_routes = require('./routes/auth');
 auth_routes(app, db);
 
 app.get(
-    '/',
+    '/', 
     (req, res) => {
         console.log("Index page")
         console.log(req.session.username);
