@@ -47,7 +47,7 @@ export class AccountService {
     const email = this.currentUserEmail;
     const username = email.split("@",1);
     console.log("username: "+username);
-    //this._http.post('http://localhost:3000/auth/signout', {/*observe: 'response', username*/}).subscribe(response  => { console.log(response); } )
+    this._http.post('http://localhost:3000/auth/signout',{username}).subscribe(response  => { console.log(response); } )
     this.currentUserEmail = '';
   }
 
