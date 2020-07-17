@@ -23,6 +23,7 @@ import { RadioAddSongComponent } from './components/radio/radio-addSong.componen
 
 import { CreateAccountComponent } from './components/create-account/create-account.component';
 import { LoginComponent } from './components/login/login.component';
+import { LogoutComponent } from './components/logout/logout.component';
 import { SpotifyService } from './spotify.services';
 
 
@@ -36,6 +37,7 @@ import { SpotifyService } from './spotify.services';
     MusicPlayerComponent,
     RadioAddSongComponent,
     CreateAccountComponent,
+    LogoutComponent,
 
   ],
   imports: [    

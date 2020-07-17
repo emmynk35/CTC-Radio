@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { SpotifyService } from 'src/app/spotify.services';
 import { LoginComponent } from 'src/app/components/login/login.component';
+import { LogoutComponent } from 'src/app/components/logout/logout.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -18,25 +19,35 @@ export class AppComponent implements OnInit {
 
   constructor(public dialog: MatDialog, private s: SpotifyService) {}
 
-  openLogin(): void {
+  ngOnInit() {
+
+  }
+
+  openAccount(): void {
     if (this.logInOrOut == 'Login') {
       this.dialog.open(LoginComponent, {
         width: '600px',
         panelClass: 'my-dialog',
         data: {email: this.accountEmail, password: this.accountPassword, login: this.login}
       });
-      this.logInOrOut = 'Logout';
+      this.logInOrOut = 'Account';
     } else {
+      if (this.logInOrOut == 'Account') {
+        this.dialog.open(LogoutComponent, {
+          width: '600px',
+          panelClass: 'my-dialog',
+          data: {email: this.accountEmail, password: this.accountPassword, login: this.login}
+        });
 
       this.logInOrOut = 'Login';
+
     }
   }
 
 
   
-  ngOnInit() {
-  }
+
   
 }
 
-
+}
