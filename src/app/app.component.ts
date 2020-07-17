@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { AccountService } from 'src/app/account.service';
 import { LoginComponent } from 'src/app/components/login/login.component';
+import { LogoutComponent } from 'src/app/components/logout/logout.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -18,29 +19,37 @@ export class AppComponent implements OnInit {
 
   constructor(public dialog: MatDialog, private acc: AccountService) {}
 
-  openLogin(): void {
+  ngOnInit() {
+
+  }
+
+  openAccount(): void {
     if (this.logInOrOut == 'Login') {
       const ref = this.dialog.open(LoginComponent, {
         width: '600px',
         panelClass: 'my-dialog',
         data: {email: this.accountEmail, password: this.accountPassword, login: this.login}
       });
-      ref.afterClosed().subscribe(result => {
-        if (result.event == true) {
-          this.logInOrOut = 'Logout';
-        }
-      });
+
+      this.logInOrOut = 'Account';
     } else {
-      this.acc.logout();
+      if (this.logInOrOut == 'Account') {
+        this.dialog.open(LogoutComponent, {
+          width: '600px',
+          panelClass: 'my-dialog',
+          data: {email: this.accountEmail, password: this.accountPassword, login: this.login}
+        });
+
+
       this.logInOrOut = 'Login';
+
     }
   }
 
 
   
-  ngOnInit() {
-  }
+
   
 }
 
-
+}

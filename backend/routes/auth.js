@@ -86,12 +86,14 @@ module.exports = (app, db) => {
     app.post (
         '/auth/signout', 
         async (req, res) => {
+
             console.log(req.session.username);
             if(!req.session.username){
                 console.log("need to login");
                 res.redirect('/auth/signin');
                 return;
             }
+
             console.log("destroying session")
             req.session.destroy();
             res.redirect('/')

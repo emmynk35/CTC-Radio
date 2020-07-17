@@ -9,8 +9,11 @@ import { Track } from 'src/app/track';
 import { MatTableDataSource } from '@angular/material/table';
 import { SpotifyService } from 'src/app/spotify.services';
 import { inject } from '@angular/core/testing';
+import { Observable } from 'rxjs';
+import { PlaylistSpot } from 'src/app/playlistSpot';
+import { Items } from 'src/app/items';
 
-const TOKEN: string ="BQChlvr0YendseeJ6Kxaf2Lr7bC4cQFImof4MYd35ZBswjZbCKuDUvkLqzHSQEUnI22158QDa7bbrxz9X8z4ndcQTI-4PqNJmhM9F0tNKxqSiNkXSGnGL6yiLzpf_0_mehgSsNxmoFSnmLIO4A";
+const TOKEN: string ="BQDP59e7B_ydRedpkN_E3sSfis50vAy7NzGJZBgrdcaC3hEyOB5tdkCqAXp8GPuBR4-VsgUXCDHZ4z-LXhJLENUyUFh8ZYhwSPghXaoVTMXDKp9D0prCFkoJuVMw6NPkOhO6ErG_K9oT5hdoCzLHFEcrLdWhmCd9SCCxRA";
 const SONG_DATA: Song[] = [
     {
     title: "the sheep goes BAA",
@@ -51,12 +54,15 @@ export class RadioComponent implements OnInit{
         - need to pay
     */ 
     displayedColumns: string[]= [ "albumCoverURL", "Title", "Artist", "Album"];
-    dataSource= SONG_DATA;
+    dataSource: MatTableDataSource<Items> = new MatTableDataSource<Items>([]);
     isHidden = true;
     vol = 'Mute';
     searchedSongs: Track[];
     dataSourceSearch: MatTableDataSource<Track> = new MatTableDataSource<Track>([]);
     song = new FormControl('');    
+    playlist: PlaylistSpot;
+    tr:Track; 
+    adding: string; 
 
     //add spotify service
     constructor(private router:Router, public dialog: MatDialog, public service:SpotifyService, private renderer: Renderer2){
@@ -77,6 +83,33 @@ export class RadioComponent implements OnInit{
         s.text = '';
         this.renderer.appendChild(document.body, s);
         
+        this.service.createPlaylist( "alinaperez17","currentPlaylist").subscribe(playlist => {this.playlist = playlist;
+            console.log("creates playlist", this.playlist.id);
+            this.service.addTracksToPlaylist(this.playlist.id, ["spotify:track:4HlFJV71xXKIGcU3kRyttv"]).subscribe(playlist =>{
+                this.playlist.snapshot_id= playlist;
+                console.log("hi", this.playlist);
+                this.service.addTracksToPlaylist(this.playlist.id, ["spotify:track:4HlFJV71xXKIGcU3kRyttv"]).subscribe(playlist =>{
+                    this.playlist.snapshot_id= playlist;
+                    console.log("hi", this.playlist);
+                this.service.getPlaylist(this.playlist.id).subscribe(playlist => {
+                    this.dataSource.data = playlist.items;
+                    console.log("gets playlist: ", this.dataSource.data);
+            })
+            })
+        })
+        });
+
+    }
+
+    updatePlaylist(uri: string) {
+        this.service.addTracksToPlaylist(this.playlist.id, [uri]).subscribe(playlist =>{
+            this.playlist.snapshot_id= playlist;
+            console.log("hi", this.playlist);
+            this.service.getPlaylist(this.playlist.id).subscribe(playlist => {
+                this.dataSource.data = playlist.items;
+                console.log("gets playlist: ", this.dataSource.data);
+        })
+        })
 
     }
 
@@ -84,7 +117,10 @@ export class RadioComponent implements OnInit{
         const s = this.renderer.createElement('script');
         s.text = `
             window.onSpotifyWebPlaybackSDKReady = () => {
-                const token = 'BQCtVIGjJ5LJHpIafCtdIxYRqlStzuRgMw1-8seEZOMzGtjRbwwlNVSxN2Q9haK17IMYppTyhLWDbzjklQ1H8eK0pgTVWxgndST7i3DMYg7MQl84OEWQLKyWVnpc4B5ayQQWvv7bZ_iTtCvqSZ-0uBj-w2NAhHHo';
+
+                const token = 'BQDP59e7B_ydRedpkN_E3sSfis50vAy7NzGJZBgrdcaC3hEyOB5tdkCqAXp8GPuBR4-VsgUXCDHZ4z-LXhJLENUyUFh8ZYhwSPghXaoVTMXDKp9D0prCFkoJuVMw6NPkOhO6ErG_K9oT5hdoCzLHFEcrLdWhmCd9SCCxRA
+                ';
+
                 const player = new Spotify.Player({
                 name: 'Web Playback SDK Quick Start Player',
                 getOAuthToken: cb => { cb(token); }
@@ -117,13 +153,13 @@ export class RadioComponent implements OnInit{
     }
 
     search(): void {
+        console.log("data:", this.dataSource.data);
         console.log(this.song.value);
         this.isHidden = !this.isHidden; 
         console.log("isHidden: ", this.isHidden);
         this.service.searchSongTest(this.song.value, "track", 20 , TOKEN).subscribe(tracks => {
             //this.dataSourceSearch.data = tracks.tracks.items;
             console.log("Data: ", this.dataSourceSearch.data);
-
             console.log("SongL", this.dataSourceSearch.data);
         });
 
@@ -133,6 +169,8 @@ export class RadioComponent implements OnInit{
     openPopup(uri:string, title:string, artist:string): void{
 
         console.log("Adding song to queue:", title);
+        this.updatePlaylist(uri);
+        console.log("updated playlist");
         this.dialog.open(RadioAddSongComponent, {
             width: '600px',
             data: {
@@ -141,8 +179,6 @@ export class RadioComponent implements OnInit{
                 artist: artist
             } 
         });
- 
-
     }
     
 }   
