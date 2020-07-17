@@ -1,12 +1,19 @@
 const https = require('https');
 const querystring = require('querystring');
 const request = require('request');
+
+
 global.globalAuthFlag = false;
+
+
+
+
+
 
 module.exports = (app, db) => {
 
     app.post (
-        '/auth/signup',
+        '/auth/signup', 
         async (req, res) => {
 
             console.log("got the body:", req.body);
@@ -47,7 +54,7 @@ module.exports = (app, db) => {
     )
 
     app.post (
-        '/auth/signin',
+        '/auth/signin', 
         async (req, res) => {
 
             console.log("got the body:", req.body);
@@ -77,13 +84,16 @@ module.exports = (app, db) => {
     )
 
     app.post (
-        '/auth/signout',
+        '/auth/signout', 
         async (req, res) => {
-            // if(!req.session.username){
-            //     console.log("need to login");
-            //     res.redirect('/auth/signin');
-            //     return;
-            // }
+
+            console.log(req.session.username);
+            if(!req.session.username){
+                console.log("need to login");
+                res.redirect('/auth/signin');
+                return;
+            }
+
             console.log("destroying session")
             req.session.destroy();
             res.redirect('/')
@@ -136,7 +146,7 @@ module.exports = (app, db) => {
     )
 
     app.get(
-        '/auth/token',
+        '/auth/token', 
         async (req, res) => {
             const tokenRef= db.collection('spotify').doc('tokens');
             const accessToken = await tokenRef.get("refresh_token");

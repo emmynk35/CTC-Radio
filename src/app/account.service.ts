@@ -30,6 +30,15 @@ export class AccountService {
 
   loginToExistingAccount(email : string, password : string)
   {
+
+    return this._http.post('http://localhost:3000/auth/signin', {observe: 'response', email, password}, {withCredentials: true}).subscribe(response  => { console.log(response); } )
+  }
+
+  logout() {
+     return this._http.post('http://localhost:3000/auth/signout', {test: "test"}, {withCredentials: true}).subscribe( res => {
+       console.log(res);
+     });
+
     this.currentUserEmail = email;
     this._http.post('http://localhost:3000/auth/signin', {observe: 'response', email, password}).subscribe(response  => { console.log(response); } )
   }
@@ -49,6 +58,7 @@ export class AccountService {
     console.log("username: "+username);
     this._http.post('http://localhost:3000/auth/signout',{username}).subscribe(response  => { console.log(response); } )
     this.currentUserEmail = '';
+
   }
 
 }

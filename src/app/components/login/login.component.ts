@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, Optional } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog'
 import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
@@ -23,7 +23,8 @@ import { AccountService } from '../../account.service';
  
  export class LoginComponent {
 
-   login = false;
+    login = false;
+    local_data: any;
     hide = true;
     email: string;
     password: string; 
@@ -38,7 +39,9 @@ import { AccountService } from '../../account.service';
      
       constructor(private accountService : AccountService, public dialog: MatDialog,
         public dialogRef: MatDialogRef<LoginComponent>,
-       @Inject(MAT_DIALOG_DATA) public data:any){
+        @Optional() @Inject(MAT_DIALOG_DATA) public data:any){
+          this.local_data = {...data};
+          this.login = this.local_data.login;
         }
 
 
@@ -48,6 +51,10 @@ import { AccountService } from '../../account.service';
         this.password = this.passwordFormControl.value;
         this.accountService.loginToExistingAccount(this.email , this.password);
         this.login = true;
+        this.dialogRef.close({
+          event: this.login,
+          action: this.local_data
+        });
     }
 
     onSubmitSignUp():void {

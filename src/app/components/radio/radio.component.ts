@@ -117,8 +117,10 @@ export class RadioComponent implements OnInit{
         const s = this.renderer.createElement('script');
         s.text = `
             window.onSpotifyWebPlaybackSDKReady = () => {
+
                 const token = 'BQDP59e7B_ydRedpkN_E3sSfis50vAy7NzGJZBgrdcaC3hEyOB5tdkCqAXp8GPuBR4-VsgUXCDHZ4z-LXhJLENUyUFh8ZYhwSPghXaoVTMXDKp9D0prCFkoJuVMw6NPkOhO6ErG_K9oT5hdoCzLHFEcrLdWhmCd9SCCxRA
                 ';
+
                 const player = new Spotify.Player({
                 name: 'Web Playback SDK Quick Start Player',
                 getOAuthToken: cb => { cb(token); }
@@ -156,7 +158,7 @@ export class RadioComponent implements OnInit{
         this.isHidden = !this.isHidden; 
         console.log("isHidden: ", this.isHidden);
         this.service.searchSongTest(this.song.value, "track", 20 , TOKEN).subscribe(tracks => {
-            this.dataSourceSearch.data = tracks.tracks.items;
+            //this.dataSourceSearch.data = tracks.tracks.items;
             console.log("Data: ", this.dataSourceSearch.data);
             console.log("SongL", this.dataSourceSearch.data);
         });

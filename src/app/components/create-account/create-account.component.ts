@@ -36,14 +36,18 @@ import { LoginComponent } from '../login/login.component';
 
     matcher = new MyErrorStateMatcher();
   
+
+
     constructor(private accountService : AccountService, public dialog: MatDialog,
       public dialogRef: MatDialogRef<CreateAccountComponent>,
      @Inject(MAT_DIALOG_DATA) public data:any){}
+
 
   public onCreateNewAccount(){
       this.hide = false;
       this.email = this.emailFormControl.value;
       this.password = this.passwordFormControl.value;
+
       alert("New Account Created\n Name: "+this.firstName.value+" "+this.lastName.value+" \n email: "+this.email);
       this.accountService.addAccount(this.email , this.password);
       this.launchLoginWithFilledInformation();
@@ -56,6 +60,7 @@ import { LoginComponent } from '../login/login.component';
         maxHeight: '60vh',
         data: {email: this.email}
     });
+
     }
 
   
